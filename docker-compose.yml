@@ -1,0 +1,15 @@
+version: "2"
+services:
+  sickrage:
+    build: sickrage
+    environment:
+      - DISABLE_AUTOUPDATE=yes
+    image: mrmachine/sickrage:latest
+    ports:
+      - "8081:8081"
+    restart: always
+    volumes:
+      - ./sickrage/src:/opt/sickrage/src
+      - ./sickrage/var:/opt/sickrage/var
+      - ./sickrage:/opt/sickrage
+      - ./storage:/mnt/storage

@@ -1,0 +1,12 @@
+sickrage:
+  autoredeploy: true
+  environment:
+    - DISABLE_AUTOUPDATE=yes
+  image: mrmachine/sickrage:latest
+  ports:
+    - "8081:8081"
+  restart: always
+  volumes:
+    - /home/tailee/dataset/opt/sickrage/src:/opt/sickrage/src
+    - /home/tailee/dataset/opt/sickrage/var:/opt/sickrage/var
+    - /home/tailee/dataset:/mnt/storage
