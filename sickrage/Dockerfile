@@ -12,6 +12,7 @@ RUN apk update \
     && rm -rf /var/cache/apk/*
 
 RUN pip install --no-cache-dir Babel
+RUN rm /usr/bin/tini
 
 EXPOSE 8081
 VOLUME /opt/sickrage/src/ /opt/sickrage/var/
