@@ -19,3 +19,12 @@ sickrage:
     - /home/tailee/dataset/opt/sickrage/src:/opt/sickrage/src
     - /home/tailee/dataset/opt/sickrage/var:/opt/sickrage/var
     - /home/tailee/dataset:/mnt/storage
+transmission:
+  autoredeploy: true
+  image: mrmachine/transmission:latest
+  ports:
+    - "9091:9091"
+  restart: always
+  volumes:
+    - /home/tailee/dataset/opt/transmission/var:/opt/transmission/var
+    - /home/tailee/dataset:/mnt/storage

@@ -23,3 +23,13 @@ services:
       - ./sickrage/var:/opt/sickrage/var
       - ./sickrage:/opt/sickrage
       - ./storage:/mnt/storage
+  transmission:
+    build: transmission
+    image: mrmachine/transmission:latest
+    ports:
+      - "9091:9091"
+    restart: always
+    volumes:
+      - ./transmission/var:/opt/transmission/var
+      - ./transmission:/opt/transmission
+      - ./storage:/mnt/storage
