@@ -21,6 +21,6 @@ WORKDIR /opt/sickrage/
 ENTRYPOINT ["tini", "--"]
 CMD ["entrypoint.sh", "run.sh"]
 
-COPY . /opt/sickrage
+COPY . /opt/sickrage/
 
 ENV PATH=/opt/sickrage/bin:$PATH
