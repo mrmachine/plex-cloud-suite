@@ -1,6 +1,8 @@
 FROM alpine:edge
 
-RUN apk add --update \
+RUN apk update \
+    && apk upgrade \
+    && apk add \
         bash \
         dockerize \
         git \
