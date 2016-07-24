@@ -1,3 +1,12 @@
+nzbget:
+  autoredeploy: true
+  image: mrmachine/nzbget:latest
+  ports:
+    - "6789:6789"
+  restart: always
+  volumes:
+    - /home/tailee/dataset/opt/nzbget/var:/opt/nzbget/var
+    - /home/tailee/dataset:/mnt/storage
 sickrage:
   autoredeploy: true
   environment:

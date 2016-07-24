@@ -1,5 +1,15 @@
 version: "2"
 services:
+  nzbget:
+    build: nzbget
+    image: mrmachine/nzbget:latest
+    ports:
+      - "6789:6789"
+    restart: always
+    volumes:
+      - ./nzbget/var:/opt/nzbget/var
+      - ./nzbget:/opt/nzbget
+      - ./storage:/mnt/storage
   sickrage:
     build: sickrage
     environment:
