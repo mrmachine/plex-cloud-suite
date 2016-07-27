@@ -5,6 +5,7 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
 RUN apk update \
     && apk upgrade \
     && apk add \
+        dockerize \
         nzbget@testing \
         tini \
     && rm -rf /var/cache/apk/*

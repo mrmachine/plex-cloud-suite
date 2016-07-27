@@ -4,11 +4,9 @@ set -e
 
 cd /opt/nzbget/var
 
-# Default config.
+# Render config template.
 if [[ ! -f nzbget.conf ]]; then
-	cp /usr/share/nzbget/nzbget.conf .
-	sed -i -e "s#\(MainDir=\).*#\1/mnt/storage/NZBGet#g" nzbget.conf
-	sed -i -e "s#\(ControlPassword=\).*#\1#g" nzbget.conf
+	dockerize -template ../nzbget.tmpl.conf:nzbget.conf
 fi
 
 exec "${@:-sh}"
