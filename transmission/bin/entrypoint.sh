@@ -5,8 +5,7 @@ set -e
 cd /opt/transmission/var
 
 # Default config.
-if [[ ! -f settings.json ]]; then
-	cp ../settings.json .
-fi
+[[ ! -f config.yml ]] && dockerize -template ../config.tmlp.yml:config.yml
+[[ ! -f settings.json ]] && cp ../settings.json .
 
 exec "${@:-sh}"
