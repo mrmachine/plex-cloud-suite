@@ -12,7 +12,6 @@ RUN apk update \
         py-lxml \
         tini \
     && rm -rf /var/cache/apk/*
-
 RUN rm /usr/bin/tini
 
 EXPOSE 8081
@@ -23,5 +22,4 @@ ENTRYPOINT ["tini", "--"]
 CMD ["entrypoint.sh", "run.sh"]
 
 COPY . /opt/sickrage/
-
 ENV PATH=/opt/sickrage/bin:$PATH
