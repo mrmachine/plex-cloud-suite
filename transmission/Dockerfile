@@ -3,7 +3,7 @@ FROM alpine:edge
 RUN apk update \
     && apk upgrade \
     && apk add \
-    	jq \
+        jq \
         transmission-daemon \
         tini \
     && rm -rf /var/cache/apk/*
@@ -18,5 +18,4 @@ ENTRYPOINT ["tini", "--"]
 CMD ["entrypoint.sh", "run.sh"]
 
 COPY . /opt/transmission/
-
 ENV PATH=/opt/transmission/bin:$PATH
