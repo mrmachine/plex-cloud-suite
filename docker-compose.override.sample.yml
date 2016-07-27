@@ -1,0 +1,10 @@
+version: "2"
+services:
+  nzbget:
+    environment:
+      - SERVER1_USERNAME=
+      - SERVER1_PASSWORD=
+  sickrage:
+    environment:
+      - BTN_API_KEY=
+      - NZBS_ORG_API_KEY=
