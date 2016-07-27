@@ -7,11 +7,12 @@ RUN apk update \
         dockerize \
         git \
         python \
+        py-babel \
         py-pip \
+        py-lxml \
         tini \
     && rm -rf /var/cache/apk/*
 
-RUN pip install --no-cache-dir Babel
 RUN rm /usr/bin/tini
 
 EXPOSE 8081
