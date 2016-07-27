@@ -8,6 +8,7 @@ RUN apk update \
         dockerize \
         nzbget@testing \
         tini \
+        unrar \
     && rm -rf /var/cache/apk/*
 
 RUN rm /usr/bin/tini
