@@ -2,4 +2,22 @@
 
 set -e
 
-process-torrents -c /opt/transmission/var/config.yml -vv
+# TR_APP_VERSION
+# TR_TIME_LOCALTIME
+# TR_TORRENT_DIR
+# TR_TORRENT_HASH
+# TR_TORRENT_ID
+# TR_TORRENT_NAME
+
+cat <<EOF
+Processing completed torrent.
+  TR_APP_VERSION: $TR_APP_VERSION
+  TR_TIME_LOCALTIME: $TR_TIME_LOCALTIME
+  TR_TORRENT_DIR: $TR_TORRENT_DIR
+  TR_TORRENT_HASH: $TR_TORRENT_HASH
+  TR_TORRENT_ID: $TR_TORRENT_ID
+  TR_TORRENT_NAME: $TR_TORRENT_NAME
+EOF
+
+TorrentToMedia.py
+clean-transmission.sh

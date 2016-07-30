@@ -1,5 +1,7 @@
 nzbget:
   autoredeploy: true
+  environment:
+    - DISABLE_AUTOUPDATE=yes
   image: mrmachine/nzbget:latest
   ports:
     - "6789:6789"

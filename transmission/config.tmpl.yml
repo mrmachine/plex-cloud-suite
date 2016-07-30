@@ -1,7 +1,0 @@
-torrent_dirs:
-  - download_dir: /mnt/storage/Transmission/Movies
-    post_processing_dir: /mnt/storage/Downloads/complete/Movies
-    ratio: {{ default .Env.RATIO_MOVIES 2 }}
-  - download_dir: /mnt/storage/Transmission/TV Shows
-    post_processing_dir: /mnt/storage/Downloads/complete/TV Shows
-    seed_days: {{ default .Env.SEED_DAYS_TV_SHOWS 10 }}

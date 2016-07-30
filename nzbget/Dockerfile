@@ -5,7 +5,9 @@ RUN apk update \
     && apk upgrade \
     && apk add \
         dockerize \
+        git \
         nzbget@testing \
+        python \
         tini \
         unrar \
     && rm -rf /var/cache/apk/*
