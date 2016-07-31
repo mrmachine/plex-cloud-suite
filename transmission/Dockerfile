@@ -6,16 +6,14 @@ RUN apk update \
         bash \
         bc \
         dockerize \
-        ffmpeg \
-        git \
-        p7zip \
+        jq \
         python \
+        py-pip \
         transmission-cli \
         transmission-daemon \
         tini \
-        unrar \
     && rm -rf /var/cache/apk/*
-
+RUN pip install --no-cache-dir hardlink
 RUN rm /usr/bin/tini
 
 EXPOSE 9091 51413 51413/udp
@@ -26,4 +24,4 @@ ENTRYPOINT ["tini", "--"]
 CMD ["entrypoint.sh", "run.sh"]
 
 COPY . /opt/transmission/
-ENV PATH=/opt/transmission/bin:/opt/transmission/var/nzbToMedia:$PATH
+ENV PATH=/opt/transmission/bin:$PATH

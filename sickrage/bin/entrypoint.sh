@@ -3,6 +3,7 @@
 set -e
 
 cd /opt/sickrage/src
+mkdir -p "/mnt/storage/Downloads/complete/TV Shows"  # Avoid warning during automatic post-processing
 
 # Get source code.
 if [[ ! -d .git ]]; then

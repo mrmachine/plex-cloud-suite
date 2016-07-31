@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# Remove torrents and data from Transmission when ratio or seeding time limit
-# has been reached.
+# Remove torrents and data from Transmission when ratio or seeding time
+# requirements have been satisfied.
 
 set -e
 
 # {category:ratio:hours};...
-CATEGORY_LIMITS="${CATEGORY_LIMITS:-Movies:2.0:;TV Shows::240}"
-IFS=';' read -r -a CATEGORY_LIMITS <<< "$CATEGORY_LIMITS"
+REQUIREMENTS="${REQUIREMENTS:-Movies:2.0:;TV Shows::240}"
+IFS=';' read -r -a REQUIREMENTS <<< "$REQUIREMENTS"
 
 # Use sed to get list of torrent IDs.
 for ID in $(transmission-remote --list | sed -nr 's/^ *(\d+).*/\1/p')
@@ -23,7 +23,7 @@ do
     SEEDING_TIME=$(echo "${SEEDING_TIME:-0} / 60 / 60" | bc)
 
     cat <<EOF
-Cleaning Torrent
+Clean Torrent:
   NAME: $NAME
   LOCATION: $LOCATION
   PERCENT DONE: $PERCENT_DONE
@@ -33,34 +33,34 @@ EOF
 
     # Skip if incomplete.
     if [[ "$PERCENT_DONE" != 100 ]]; then
-        echo '  # Do nothing. Torrent is incomplete.'
+        echo '  Torrent is incomplete. Do nothing.'
         continue
     fi
 
-    # Check limits for matching category.
-    for LIMITS in "${CATEGORY_LIMITS[@]}";
+    # Check requirements for category matching torrent location.
+    for CATEGORY in "${REQUIREMENTS[@]}";
     do
-        IFS=':' read category ratio_limit seeding_time_limit <<< "$LIMITS"
+        IFS=':' read category ratio_req seeding_time_req <<< "$CATEGORY"
 
-        # Skip if category doesn't match location.
+        # Skip if category doesn't match torrent location.
         if [[ "$category" != "$LOCATION" ]]; then
             continue
         fi
 
         cat <<EOF
-  Limits
-    RATIO: $ratio_limit
-    SEEDING TIME: $seeding_time_limit
+  Requirements:
+    RATIO: $ratio_req
+    SEEDING TIME: $seeding_time_req
 EOF
 
-        # Remove and delete if ratio or seeding time limit reached.
-        if [[ -n "$ratio_limit" && $(echo "$RATIO >= $ratio_limit" | bc) = 1 ]] || \
-           [[ -n "$seeding_time_limit" && $(echo "$SEEDING_TIME >= $seeding_time_limit" | bc) = 1 ]]
+        # Remove and delete if ratio or seeding time requiement satisfied.
+        if [[ -n "$ratio_req" && $(echo "$RATIO >= $ratio_req" | bc) = 1 ]] || \
+           [[ -n "$seeding_time_req" && $(echo "$SEEDING_TIME >= $seeding_time_req" | bc) = 1 ]]
         then
-            echo "  # Remove and delete torrent: $NAME"
+            echo "  Requirements satisfied. Remove and delete torrent: $NAME"
             transmission-remote --torrent $ID --remove-and-delete
         else
-            echo '  # Do nothing. Limits not reached.'
+            echo '  Requirements not satisfied. Do nothing.'
         fi
     done
 done
