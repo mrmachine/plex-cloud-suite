@@ -3,15 +3,13 @@
 set -e
 
 cd /opt/sickrage/src
-mkdir -p "/mnt/storage/Downloads/complete/TV Shows"  # Avoid warning during automatic post-processing
 
 # Get source code.
 if [[ ! -d .git ]]; then
 	git clone https://github.com/SickRage/SickRage.git .
 else
 	# Update source code.
-	if [[ -z "$DISABLE_AUTOUPDATE" ]]
-	then
+	if [[ -z "$DISABLE_AUTOUPDATE" ]]; then
 		git pull
 	fi
 fi
@@ -45,5 +43,8 @@ export SICKRAGE_API_KEY="$(cat ../var/sickrage_api_key.txt)"
 if [[ ! -f ../var/config.ini ]]; then
 	dockerize -template ../config.tmpl.ini:../var/config.ini
 fi
+
+# Create required directories.
+mkdir -p "/mnt/storage/Downloads/complete/TV Shows"
 
 exec "${@:-bash}"
