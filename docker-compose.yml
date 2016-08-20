@@ -1,5 +1,18 @@
 version: "2"
 services:
+  couchpotatoserver:
+    build: couchpotatoserver
+    environment:
+      - DISABLE_AUTOUPDATE=yes
+    image: mrmachine/couchpotatoserver:latest
+    ports:
+      - 5050:5050
+    restart: always
+    volumes:
+      - ./couchpotatoserver/src:/opt/couchpotatoserver/src
+      - ./couchpotatoserver/var:/opt/couchpotatoserver/var
+      - ./couchpotatoserver:/opt/couchpotatoserver
+      - ./storage:/mnt/storage
   nzbget:
     build: nzbget
     image: mrmachine/nzbget:latest

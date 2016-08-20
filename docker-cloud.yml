@@ -1,3 +1,16 @@
+couchpotatoserver:
+  build: couchpotatoserver
+  environment:
+    - DISABLE_AUTOUPDATE=yes
+  image: mrmachine/couchpotatoserver:latest
+  ports:
+    - 5050:5050
+  restart: always
+  volumes:
+    - /home/tailee/dataset/opt/couchpotatoserver/src:/opt/couchpotatoserver/src
+    - /home/tailee/dataset/opt/couchpotatoserver/var:/opt/couchpotatoserver/var
+    - /home/tailee/dataset/opt/couchpotatoserver:/opt/couchpotatoserver
+    - /home/tailee/dataset:/mnt/storage
 nzbget:
   autoredeploy: true
   image: mrmachine/nzbget:latest

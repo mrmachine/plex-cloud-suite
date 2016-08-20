@@ -1,5 +1,11 @@
 version: "2"
 services:
+  couchpotatoserver:
+    environment:
+      - NZBS_ORG_API_KEY=
+      - PASSTHEPOPCORN_PASSWORD=
+      - PASSTHEPOPCORN_PASSKEY=
+      - PUSHOVER_USER_KEY=
   nzbget:
     environment:
       - SERVER1_USERNAME=
