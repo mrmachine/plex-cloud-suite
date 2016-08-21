@@ -2,17 +2,17 @@ version: "2"
 services:
   couchpotatoserver:
     environment:
-      - NZBS_ORG_API_KEY=
-      - PASSTHEPOPCORN_PASSWORD=
-      - PASSTHEPOPCORN_PASSKEY=
-      - PUSHOVER_USER_KEY=
+      NZBS_ORG_API_KEY:
+      PASSTHEPOPCORN_PASSWORD:
+      PASSTHEPOPCORN_PASSKEY:
+      PUSHOVER_USER_KEY:
   nzbget:
     environment:
-      - SERVER1_USERNAME=
-      - SERVER1_PASSWORD=
+      SERVER1_USERNAME:
+      SERVER1_PASSWORD:
   sickrage:
     environment:
-      - BTN_API_KEY=
-      - NZBS_ORG_API_KEY=
-      - PUSHOVER_API_KEY=
-      - PUSHOVER_USER_KEY=
+      BTN_API_KEY:
+      NZBS_ORG_API_KEY:
+      PUSHOVER_API_KEY:
+      PUSHOVER_USER_KEY:
