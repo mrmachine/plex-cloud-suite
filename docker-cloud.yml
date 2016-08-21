@@ -7,9 +7,6 @@ couchpotatoserver:
     - 5050:5050
   restart: always
   volumes:
-    - /home/tailee/dataset/opt/couchpotatoserver/src:/opt/couchpotatoserver/src
-    - /home/tailee/dataset/opt/couchpotatoserver/var:/opt/couchpotatoserver/var
-    - /home/tailee/dataset/opt/couchpotatoserver:/opt/couchpotatoserver
     - /home/tailee/dataset:/mnt/storage
 nzbget:
   autoredeploy: true
@@ -18,7 +15,6 @@ nzbget:
     - "6789:6789"
   restart: always
   volumes:
-    - /home/tailee/dataset/opt/nzbget/var:/opt/nzbget/var
     - /home/tailee/dataset:/mnt/storage
 sickrage:
   autoredeploy: true
@@ -32,8 +28,6 @@ sickrage:
     - "8081:8081"
   restart: always
   volumes:
-    - /home/tailee/dataset/opt/sickrage/src:/opt/sickrage/src
-    - /home/tailee/dataset/opt/sickrage/var:/opt/sickrage/var
     - /home/tailee/dataset:/mnt/storage
 transmission:
   autoredeploy: true
@@ -42,5 +36,4 @@ transmission:
     - "9091:9091"
   restart: always
   volumes:
-    - /home/tailee/dataset/opt/transmission/var:/opt/transmission/var
     - /home/tailee/dataset:/mnt/storage

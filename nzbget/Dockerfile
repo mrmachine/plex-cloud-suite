@@ -14,7 +14,6 @@ RUN apk update \
 RUN rm /usr/bin/tini
 
 EXPOSE 6789
-VOLUME /opt/nzbget/var/
 WORKDIR /opt/nzbget/
 
 ENTRYPOINT ["tini", "--"]

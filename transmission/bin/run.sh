@@ -2,4 +2,4 @@
 
 set -e
 
-exec transmission-daemon --config-dir /opt/transmission/var --foreground
+exec transmission-daemon --config-dir /mnt/storage/Docker/transmission --foreground

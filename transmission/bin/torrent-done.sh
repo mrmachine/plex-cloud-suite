@@ -21,7 +21,7 @@ EOF
 TORRENT_PATH="$TR_TORRENT_DIR/$TR_TORRENT_NAME"
 
 # Get Transmission download directory.
-DOWNLOAD_DIR=$(jq -r '.["download-dir"]' /opt/transmission/var/settings.json)
+DOWNLOAD_DIR=$(jq -r '.["download-dir"]' /mnt/storage/Docker/transmission/settings.json)
 
 # Get destination path. If torrent data is in a subdirectory of the
 # Transmission download directory, recreate intermediate directories in the
@@ -29,10 +29,10 @@ DOWNLOAD_DIR=$(jq -r '.["download-dir"]' /opt/transmission/var/settings.json)
 if [[ "$TORRENT_PATH" == "$DOWNLOAD_DIR"* ]]; then
 	# Strip the Transmission download directory prefix from the torrent path to
 	# get a relative path.
-	DST="/mnt/storage/Downloads/complete/${TORRENT_PATH#$DOWNLOAD_DIR}"
+	DST="/mnt/storage/Downloads/Process/${TORRENT_PATH#$DOWNLOAD_DIR}"
 else
 	# Fallback to torrent name in complete downloads directory.
-	DST="/mnt/storage/Downloads/complete/$TR_TORRENT_NAME"
+	DST="/mnt/storage/Downloads/Process/$TR_TORRENT_NAME"
 fi
 
 cat <<EOF

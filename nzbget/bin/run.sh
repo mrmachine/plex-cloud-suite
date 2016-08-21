@@ -2,4 +2,4 @@
 
 set -e
 
-exec nzbget --configfile /opt/nzbget/var/nzbget.conf --server
+exec nzbget --configfile /mnt/storage/Docker/nzbget/nzbget.conf --server

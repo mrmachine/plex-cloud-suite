@@ -2,11 +2,15 @@
 
 set -e
 
-cd /opt/sickrage/src
+# Create required directories.
+mkdir -p "/mnt/storage/Downloads/Process/TV Shows"
+mkdir -p "/mnt/storage/TV Shows"
+mkdir -p /mnt/storage/Docker/sickrage/src
 
 # Get source code.
+cd /mnt/storage/Docker/sickrage/src
 if [[ ! -d .git ]]; then
-	git clone https://github.com/SickRage/SickRage.git .
+	git clone https://github.com/SickRage/SickRage.git $PWD
 else
 	# Update source code.
 	if [[ -z "$DISABLE_AUTOUPDATE" ]]; then
@@ -23,28 +27,28 @@ pip() {
 	command pip "$@"
 }
 export -f pip
-export PATH="$PWD/venv/bin:$PATH"
-export PIP_SRC="$PWD/venv/src"
-export PYTHONUSERBASE="$PWD/venv"
+export PATH="/mnt/storage/Docker/sickrage/venv/bin:$PATH"
+export PIP_SRC=/mnt/storage/Docker/sickrage/venv/src
+export PYTHONUSERBASE=/mnt/storage/Docker/sickrage/venv
 
 # Install Python packages.
+cd /mnt/storage/Docker/sickrage
 if [[ ! -f venv.md5 ]] || ! md5sum -c -s venv.md5; then
-	pip install -e .
-	md5sum setup.py > venv.md5
+	pip install -e src
+	md5sum src/setup.py > venv.md5
 fi
 
-# Generate random API key.
-if [[ ! -f ../var/sickrage_api_key.txt ]]; then
-	head /dev/urandom | md5sum | head -c 32 > ../var/sickrage_api_key.txt
+# Generate API key.
+cd /mnt/storage/Docker/sickrage
+if [[ ! -f api_key.txt ]]; then
+	head /dev/urandom | md5sum | head -c 32 > api_key.txt
 fi
-export SICKRAGE_API_KEY="$(cat ../var/sickrage_api_key.txt)"
+export SICKRAGE_API_KEY="$(cat api_key.txt)"
 
 # Render config template.
-if [[ ! -f ../var/config.ini ]]; then
-	dockerize -template ../config.tmpl.ini:../var/config.ini
+cd /mnt/storage/Docker/sickrage
+if [[ ! -f config.ini ]]; then
+	dockerize -template /opt/sickrage/config.tmpl.ini:config.ini
 fi
-
-# Create required directories.
-mkdir -p "/mnt/storage/Downloads/complete/TV Shows"
 
 exec "${@:-bash}"

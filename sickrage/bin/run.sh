@@ -2,4 +2,4 @@
 
 set -e
 
-exec python /opt/sickrage/src/SickBeard.py --datadir=/opt/sickrage/var
+exec python /mnt/storage/Docker/sickrage/src/SickBeard.py --datadir=/mnt/storage/Docker/sickrage

@@ -9,8 +9,6 @@ services:
       - 5050:5050
     restart: always
     volumes:
-      - ./couchpotatoserver/src:/opt/couchpotatoserver/src
-      - ./couchpotatoserver/var:/opt/couchpotatoserver/var
       - ./couchpotatoserver:/opt/couchpotatoserver
       - ./storage:/mnt/storage
   nzbget:
@@ -20,7 +18,6 @@ services:
       - "6789:6789"
     restart: always
     volumes:
-      - ./nzbget/var:/opt/nzbget/var
       - ./nzbget:/opt/nzbget
       - ./storage:/mnt/storage
   sickrage:
@@ -32,8 +29,6 @@ services:
       - "8081:8081"
     restart: always
     volumes:
-      - ./sickrage/src:/opt/sickrage/src
-      - ./sickrage/var:/opt/sickrage/var
       - ./sickrage:/opt/sickrage
       - ./storage:/mnt/storage
   transmission:
@@ -43,6 +38,5 @@ services:
       - "9091:9091"
     restart: always
     volumes:
-      - ./transmission/var:/opt/transmission/var
-      - ./transmission:/opt/transmission
       - ./storage:/mnt/storage
+      - ./transmission:/opt/transmission

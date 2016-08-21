@@ -17,7 +17,6 @@ RUN pip install --no-cache-dir hardlink
 RUN rm /usr/bin/tini
 
 EXPOSE 9091 51413 51413/udp
-VOLUME /opt/transmission/var/
 WORKDIR /opt/transmission/
 
 ENTRYPOINT ["tini", "--"]

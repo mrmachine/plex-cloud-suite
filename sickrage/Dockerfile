@@ -15,7 +15,6 @@ RUN apk update \
 RUN rm /usr/bin/tini
 
 EXPOSE 8081
-VOLUME /opt/sickrage/src/ /opt/sickrage/var/
 WORKDIR /opt/sickrage/
 
 ENTRYPOINT ["tini", "--"]

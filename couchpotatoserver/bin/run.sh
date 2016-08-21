@@ -2,4 +2,4 @@
 
 set -e
 
-exec python /opt/couchpotatoserver/src/CouchPotato.py --console_log --data_dir=/opt/couchpotatoserver/var
+exec python /mnt/storage/Docker/couchpotatoserver/src/CouchPotato.py --console_log --data_dir=/mnt/storage/Docker/couchpotatoserver

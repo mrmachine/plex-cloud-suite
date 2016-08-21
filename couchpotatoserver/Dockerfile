@@ -16,7 +16,6 @@ RUN apk update \
 RUN rm /usr/bin/tini
 
 EXPOSE 5050
-VOLUME /opt/couchpotatoserver/src/ /opt/couchpotatoserver/var/
 WORKDIR /opt/couchpotatoserver/
 
 ENTRYPOINT ["tini", "--"]

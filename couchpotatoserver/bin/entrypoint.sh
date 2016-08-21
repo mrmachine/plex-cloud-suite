@@ -2,11 +2,15 @@
 
 set -e
 
-cd /opt/couchpotatoserver/src
+# Create required directories.
+mkdir -p /mnt/storage/Docker/couchpotatoserver/src
+mkdir -p /mnt/storage/Downloads/Process/Movies
+mkdir -p /mnt/storage/Movies
 
 # Get source code.
+cd /mnt/storage/Docker/couchpotatoserver/src
 if [[ ! -d .git ]]; then
-	git clone https://github.com/CouchPotato/CouchPotatoServer.git .
+	git clone https://github.com/CouchPotato/CouchPotatoServer.git $PWD
 else
 	# Update source code.
 	if [[ -z "$DISABLE_AUTOUPDATE" ]]; then
@@ -14,18 +18,17 @@ else
 	fi
 fi
 
-# Generate random API key.
-if [[ ! -f ../var/couchpotatoserver_api_key.txt ]]; then
-	head /dev/urandom | md5sum | head -c 32 > ../var/couchpotatoserver_api_key.txt
+# Generate API key.
+cd /mnt/storage/Docker/couchpotatoserver
+if [[ ! -f api_key.txt ]]; then
+	head /dev/urandom | md5sum | head -c 32 > api_key.txt
 fi
-export COUCHPOTATOSERVER_API_KEY="$(cat ../var/couchpotatoserver_api_key.txt)"
+export COUCHPOTATOSERVER_API_KEY="$(cat api_key.txt)"
 
 # Render config template.
-if [[ ! -f ../var/settings.conf ]]; then
-	dockerize -template ../settings.tmpl.conf:../var/settings.conf
+cd /mnt/storage/Docker/couchpotatoserver
+if [[ ! -f settings.conf ]]; then
+	dockerize -template /opt/couchpotatoserver/settings.tmpl.conf:settings.conf
 fi
-
-# Create required directories.
-mkdir -p /mnt/storage/Downloads/complete/Movies
 
 exec "${@:-bash}"
