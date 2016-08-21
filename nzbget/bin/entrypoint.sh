@@ -18,6 +18,13 @@ else
 	fi
 fi
 
+# Generate API key.
+cd /mnt/storage/Docker/couchpotatoserver
+if [[ ! -f api_key.txt ]]; then
+	head /dev/urandom | md5sum | head -c 32 > api_key.txt
+fi
+export COUCHPOTATOSERVER_API_KEY="$(cat api_key.txt)"
+
 # Render config template.
 cd /mnt/storage/Docker/nzbget
 if [[ ! -f nzbget.conf ]]; then
