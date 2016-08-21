@@ -5,8 +5,10 @@ RUN apk update \
     && apk upgrade \
     && apk add \
         dockerize \
+        ffmpeg \
         git \
         nzbget@testing \
+        p7zip \
         python \
         tini \
         unrar \
