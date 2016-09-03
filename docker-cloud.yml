@@ -1,39 +1,50 @@
 couchpotatoserver:
-  build: couchpotatoserver
+  image: 'mrmachine/couchpotatoserver:latest'
+  autoredeploy: true
   environment:
     - DISABLE_AUTOUPDATE=yes
-  image: mrmachine/couchpotatoserver:latest
+    - NZBS_ORG_API_KEY=
+    - PASSTHEPOPCORN_PASSWORD=
+    - PASSTHEPOPCORN_PASSKEY=
+    - PUSHOVER_USER_KEY=
   ports:
-    - 5050:5050
+    - '5050:5050'
   restart: always
   volumes:
-    - /home/tailee/dataset:/mnt/storage
+    - '/home/tailee/dataset:/mnt/storage'
 nzbget:
-  autoredeploy: true
-  image: mrmachine/nzbget:latest
-  ports:
-    - "6789:6789"
-  restart: always
-  volumes:
-    - /home/tailee/dataset:/mnt/storage
-sickrage:
+  image: 'mrmachine/nzbget:latest'
   autoredeploy: true
   environment:
+    - SERVER1_USERNAME=
+    - SERVER1_PASSWORD=
+  ports:
+    - '6789:6789'
+  restart: always
+  volumes:
+    - '/home/tailee/dataset:/mnt/storage'
+sickrage:
+  image: 'mrmachine/sickrage:latest'
+  autoredeploy: true
+  environment:
+    - BTN_API_KEY=
     - DISABLE_AUTOUPDATE=yes
-  image: mrmachine/sickrage:latest
+    - NZBS_ORG_API_KEY=
+    - PUSHOVER_API_KEY=
+    - PUSHOVER_USER_KEY=
   links:
     - nzbget
     - transmission
   ports:
-    - "8081:8081"
+    - '8081:8081'
   restart: always
   volumes:
-    - /home/tailee/dataset:/mnt/storage
+    - '/home/tailee/dataset:/mnt/storage'
 transmission:
+  image: 'mrmachine/transmission:latest'
   autoredeploy: true
-  image: mrmachine/transmission:latest
   ports:
-    - "9091:9091"
+    - '9091:9091'
   restart: always
   volumes:
-    - /home/tailee/dataset:/mnt/storage
+    - '/home/tailee/dataset:/mnt/storage'
