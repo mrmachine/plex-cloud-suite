@@ -5,6 +5,8 @@ services:
       NZBS_ORG_API_KEY:
       PASSTHEPOPCORN_PASSWORD:
       PASSTHEPOPCORN_PASSKEY:
+      PLEX_PASSWORD:
+      PLEX_USERNAME:
       PUSHOVER_USER_KEY:
   nzbget:
     environment:
@@ -14,7 +16,7 @@ services:
     environment:
       BTN_API_KEY:
       NZBS_ORG_API_KEY:
-      PLEX_SERVER_PASSWORD:
-      PLEX_SERVER_USERNAME:
+      PLEX_PASSWORD:
+      PLEX_USERNAME:
       PUSHOVER_API_KEY:
       PUSHOVER_USER_KEY:

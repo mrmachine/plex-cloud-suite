@@ -6,6 +6,8 @@ couchpotatoserver:
     - NZBS_ORG_API_KEY=
     - PASSTHEPOPCORN_PASSWORD=
     - PASSTHEPOPCORN_PASSKEY=
+    - PLEX_PASSWORD=
+    - PLEX_USERNAME=
     - PUSHOVER_USER_KEY=
   ports:
     - '5050:5050'
@@ -30,8 +32,8 @@ sickrage:
     - BTN_API_KEY=
     - DISABLE_AUTOUPDATE=yes
     - NZBS_ORG_API_KEY=
-    - PLEX_SERVER_PASSWORD=
-    - PLEX_SERVER_USERNAME=
+    - PLEX_PASSWORD=
+    - PLEX_USERNAME=
     - PUSHOVER_API_KEY=
     - PUSHOVER_USER_KEY=
   links:
