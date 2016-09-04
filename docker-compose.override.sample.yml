@@ -14,5 +14,7 @@ services:
     environment:
       BTN_API_KEY:
       NZBS_ORG_API_KEY:
+      PLEX_SERVER_PASSWORD:
+      PLEX_SERVER_USERNAME:
       PUSHOVER_API_KEY:
       PUSHOVER_USER_KEY:

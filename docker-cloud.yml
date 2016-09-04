@@ -30,6 +30,8 @@ sickrage:
     - BTN_API_KEY=
     - DISABLE_AUTOUPDATE=yes
     - NZBS_ORG_API_KEY=
+    - PLEX_SERVER_PASSWORD=
+    - PLEX_SERVER_USERNAME=
     - PUSHOVER_API_KEY=
     - PUSHOVER_USER_KEY=
   links:
