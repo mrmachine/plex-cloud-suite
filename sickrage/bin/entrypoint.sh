@@ -3,9 +3,9 @@
 set -e
 
 # Create required directories.
-mkdir -p "/mnt/storage/Downloads/Process/TV Shows"
-mkdir -p "/mnt/storage/TV Shows"
-mkdir -p /mnt/storage/Docker/sickrage/src
+mkdir -p "/mnt/storage/Downloads/Process/TV Shows" || true
+mkdir -p "/mnt/storage/TV Shows" || true
+mkdir -p /mnt/storage/Docker/sickrage/src || true
 
 # Get source code.
 cd /mnt/storage/Docker/sickrage/src
