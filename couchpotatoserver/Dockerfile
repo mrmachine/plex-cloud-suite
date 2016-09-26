@@ -6,11 +6,11 @@ RUN apk update \
         bash \
         dockerize \
         git \
-        py-cryptography \
-        py-lxml \
-        py-openssl \
-        py-pip \
-        python \
+        py2-cryptography \
+        py2-lxml \
+        py2-openssl \
+        py2-pip \
+        python2 \
         tini \
     && rm -rf /var/cache/apk/*
 RUN rm /usr/bin/tini

@@ -6,10 +6,10 @@ RUN apk update \
         bash \
         dockerize \
         git \
-        python \
+        python2 \
         py-babel \
-        py-pip \
-        py-lxml \
+        py2-pip \
+        py2-lxml \
         tini \
     && rm -rf /var/cache/apk/*
 RUN rm /usr/bin/tini

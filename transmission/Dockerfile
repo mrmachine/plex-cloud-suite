@@ -7,8 +7,8 @@ RUN apk update \
         bc \
         dockerize \
         jq \
-        python \
-        py-pip \
+        python2 \
+        py2-pip \
         transmission-cli \
         transmission-daemon \
         tini \
