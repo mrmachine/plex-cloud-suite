@@ -11,6 +11,15 @@ services:
     volumes:
       - ./couchpotatoserver:/opt/couchpotatoserver
       - ./storage:/mnt/storage
+  letsencrypt:
+    build: letsencrypt
+    environment:
+      DOMAINS: couchpotato.mrmachine.net,nzbget.mrmachine.net,sickrage.mrmachine.net,transmission.mrmachine.net
+      EMAIL: real.human@mrmachine.net
+    image: mrmachine/letsencrypt:latest
+    ports:
+      - 80:80
+    restart: always
   nzbget:
     build: nzbget
     environment:
