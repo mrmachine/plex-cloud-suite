@@ -4,8 +4,8 @@ couchpotatoserver:
   environment:
     - DISABLE_AUTOUPDATE=yes
     - NZBS_ORG_API_KEY=
-    - PASSTHEPOPCORN_PASSWORD=
     - PASSTHEPOPCORN_PASSKEY=
+    - PASSTHEPOPCORN_PASSWORD=
     - PLEX_PASSWORD=
     - PLEX_USERNAME=
     - PUSHOVER_USER_KEY=
@@ -33,8 +33,8 @@ nzbget:
   image: 'mrmachine/nzbget:latest'
   autoredeploy: true
   environment:
-    - SERVER1_USERNAME=
     - SERVER1_PASSWORD=
+    - SERVER1_USERNAME=
     - VIRTUAL_HOST=https://nzbget.mrmachine.net
   ports:
     - '6789:6789'
