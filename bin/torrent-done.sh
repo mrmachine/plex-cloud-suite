@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -e
 
@@ -21,7 +21,7 @@ EOF
 TORRENT_PATH="$TR_TORRENT_DIR/$TR_TORRENT_NAME"
 
 # Get Transmission download directory.
-DOWNLOAD_DIR=$(jq -r '.["download-dir"]' /mnt/storage/Docker/transmission/settings.json)
+DOWNLOAD_DIR=$(jq -r '.["download-dir"]' /opt/var/transmission/settings.json)
 
 # Get destination path. If torrent data is in a subdirectory of the
 # Transmission download directory, recreate intermediate directories in the
@@ -31,7 +31,7 @@ if [[ "$TORRENT_PATH" == "$DOWNLOAD_DIR"* ]]; then
 	# get a relative path.
 	DST="/mnt/storage/Downloads/Process/${TORRENT_PATH#$DOWNLOAD_DIR}"
 else
-	# Fallback to torrent name in complete downloads directory.
+	# Fallback to torrent name in process downloads directory.
 	DST="/mnt/storage/Downloads/Process/$TR_TORRENT_NAME"
 fi
 

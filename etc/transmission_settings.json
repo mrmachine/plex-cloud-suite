@@ -2,5 +2,5 @@
     "download-dir": "/mnt/storage/Downloads/Transmission",
     "rpc-whitelist-enabled": false,
     "script-torrent-done-enabled": true,
-    "script-torrent-done-filename": "/opt/transmission/bin/torrent-done.sh"
+    "script-torrent-done-filename": "/opt/bin/torrent-done.sh"
 }

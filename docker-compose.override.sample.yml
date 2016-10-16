@@ -1,22 +1,27 @@
 version: "2"
 services:
-  couchpotatoserver:
+  letsencrypt:
     environment:
-      NZBS_ORG_API_KEY:
-      PASSTHEPOPCORN_PASSWORD:
-      PASSTHEPOPCORN_PASSKEY:
-      PLEX_PASSWORD:
-      PLEX_USERNAME:
-      PUSHOVER_USER_KEY:
-  nzbget:
+      DOMAINS: plex.EXAMPLE.COM,couchpotato.EXAMPLE.COM,nzbget.EXAMPLE.COM,sickrage.EXAMPLE.COM,transmission.EXAMPLE.COM # Required
+      EMAIL: # Required
+  plex-cloud-encfs:
     environment:
-      SERVER1_USERNAME:
-      SERVER1_PASSWORD:
-  sickrage:
-    environment:
+      BASIC_AUTH_PASSWORD: # Required
+      BASIC_AUTH_USERNAME: # Required
       BTN_API_KEY:
+      DOMAIN: # Required
+      ENCFS_PASSWORD: # Required
       NZBS_ORG_API_KEY:
-      PLEX_PASSWORD:
-      PLEX_USERNAME:
+      PASSTHEPOPCORN_PASSKEY:
+      PASSTHEPOPCORN_PASSWORD:
+      PASSTHEPOPCORN_USERNAME:
+      PLEX_PASSWORD: # Required
+      PLEX_TOKEN:
+      PLEX_USERNAME: # Required
       PUSHOVER_API_KEY:
       PUSHOVER_USER_KEY:
+      REQUIREMENTS: 'Movies:2.0:;TV Shows::240' # {category:ratio:hours};...
+      SERVER1_HOST:
+      SERVER1_NAME:
+      SERVER1_PASSWORD:
+      SERVER1_USERNAME:

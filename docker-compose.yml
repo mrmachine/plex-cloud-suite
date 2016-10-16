@@ -1,53 +1,27 @@
 version: "2"
 services:
-  couchpotatoserver:
-    build: couchpotatoserver
-    environment:
-      - DISABLE_AUTOUPDATE=yes
-    image: mrmachine/couchpotatoserver:latest
-    ports:
-      - 5050:5050
-    restart: always
-    volumes:
-      - ./couchpotatoserver:/opt/couchpotatoserver
-      - ./storage:/mnt/storage
   letsencrypt:
     build: letsencrypt
-    environment:
-      DOMAINS: couchpotato.mrmachine.net,nzbget.mrmachine.net,sickrage.mrmachine.net,transmission.mrmachine.net
-      EMAIL: real.human@mrmachine.net
     image: mrmachine/letsencrypt:latest
     ports:
-      - 80:80
+      - '80:80'
     restart: always
-  nzbget:
-    build: nzbget
-    environment:
-      - DISABLE_AUTOUPDATE=yes
-    image: mrmachine/nzbget:latest
+  plex-cloud-encfs:
+    build: .
+    cap_add:
+      - MKNOD
+    command: supervisor.sh
+    image: 'mrmachine/plex-cloud-encfs:latest'
     ports:
-      - "6789:6789"
+      - '443:443'
+      - '32400:32400'
+      - '51413:51413'
+    privileged: true
     restart: always
     volumes:
-      - ./nzbget:/opt/nzbget
-      - ./storage:/mnt/storage
-  sickrage:
-    build: sickrage
-    environment:
-      - DISABLE_AUTOUPDATE=yes
-    image: mrmachine/sickrage:latest
-    ports:
-      - "8081:8081"
-    restart: always
-    volumes:
-      - ./sickrage:/opt/sickrage
-      - ./storage:/mnt/storage
-  transmission:
-    build: transmission
-    image: mrmachine/transmission:latest
-    ports:
-      - "9091:9091"
-    restart: always
-    volumes:
-      - ./storage:/mnt/storage
-      - ./transmission:/opt/transmission
+      - ./bin:/opt/bin
+      - ./etc:/opt/etc
+      - ./local-storage:/mnt/local-storage
+      - ./var:/opt/var
+    volumes_from:
+      - letsencrypt

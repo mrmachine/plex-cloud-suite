@@ -1,5 +1,4 @@
 /**/.DS_Store
-/*/src/
-/*/var/
 /docker-compose.override.yml
-/storage/
+/local-storage/
+/var/

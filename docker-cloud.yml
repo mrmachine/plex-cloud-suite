@@ -1,74 +1,48 @@
-couchpotatoserver:
-  image: 'mrmachine/couchpotatoserver:latest'
+letsencrypt:
+  image: 'mrmachine/letsencrypt:latest'
   autoredeploy: true
   environment:
-    - DISABLE_AUTOUPDATE=yes
+    - DOMAINS=plex.EXAMPLE.COM,couchpotato.EXAMPLE.COM,nzbget.EXAMPLE.COM,sickrage.EXAMPLE.COM,transmission.EXAMPLE.COM # Required
+    - EMAIL= # Required
+  ports:
+    - '80:80'
+  restart: always
+  tags:
+    - plex-cloud-encfs
+plex-cloud-encfs:
+  image: 'mrmachine/plex-cloud-encfs:latest'
+  autoredeploy: true
+  cap_add:
+    - MKNOD
+  environment:
+    - BASIC_AUTH_PASSWORD= # Required
+    - BASIC_AUTH_USERNAME= # Required
+    - BTN_API_KEY=
+    - DOMAIN= # Required
+    - ENCFS_PASSWORD= # Required
     - NZBS_ORG_API_KEY=
     - PASSTHEPOPCORN_PASSKEY=
     - PASSTHEPOPCORN_PASSWORD=
-    - PLEX_PASSWORD=
-    - PLEX_USERNAME=
-    - PUSHOVER_USER_KEY=
-    - VIRTUAL_HOST=https://couchpotato.mrmachine.net
-  ports:
-    - '5050:5050'
-  restart: always
-  volumes:
-    - '/home/tailee/dataset:/mnt/storage'
-haproxy:
-  image: dockercloud/haproxy:1.5.1
-  environment:
-    - DEFAULT_SSL_CERT=-----BEGIN RSA PRIVATE KEY-----\nMIIEpQIBAAKCAQEAr5tRcmpsjocfWgJ6t5HEnfRHx/NY/akx2dbOPUAAjZr9e//T\nf0XyNkNNgwyLP4K08yJmeZjGKsrU1CfUy6NCLzr9yH/gH/xBVw+2r4kcpjRJSm+1\nowQM5wOilZuy5J+R9AYroWwk7psu8ytLxEJRH44g04V3FZ4Zdb8ARwLp28GlJVv3\nc8rJGOwmA/iwmMn1sVaz2zJHU80xiBzT9EXFWEYy1heEC5tVzgoi4tc++2xz4Qvt\nNsm4pTEtRUgCiR5sOqkUMYP52cpZvQp+yn3wPXVYgDPNj+Hv20rFnyuNbQxk3We6\ntjb/3CvPmxrh+qrpBFJVCqjb0QikJCrvZ1TiyQIDAQABAoIBAFcHE1svsPMFthzm\ng6i7/gQFzxkh2aWEl2cNFJK4SE3lVOCCDW/S21HXEu/yZIQqI8Em+EAk3XjRop4t\ny0DMfP1pL+KQtSNE4aDi8beWrPMVkIjqScsrM7W9UHLygbrZ9fxInpDWRotVrvPm\nLhtqfke0KUKKr1SwUI/RA7Mtl3ZHdIarFbQdraUDr1Mso4w2ufmaM7zplgVvEJY3\nR9ipNfdP9FcwN7jJBNwutwKvTfci8RqzKIwUFF/8di2zJFwWXNNF2ttk23LRO9bO\nAAFDfB7A4r1hu4pRxX+BLef7dFvm+MVpKrm5tgLrrIvdBraPpkEDnMKrfahsmFdF\nir7n1f0CgYEA1VOnPlQUWaxje+tSJd0yxDpMtb+BtUXEIUfU4k7jg3OSPnBS7SH1\nVGl059PKPSZ8UZigfy4ypC5ymcGtsymdRKOEovo9vPXkbh96MBkKXwNZzZoCYP01\nxlHiSdySRU5iWPQvgdaPoR31kNQqlIAnPq9ez9iNhP9KmSTTSpPSRHMCgYEA0rwK\nlj6PUZXHIHIkrBEl0RrRa7LlUUe/MWyeUIe7MXCBw8WyD0Fai7qEGf+bgkYNtpX6\nA3eCQoyqZZ+rCQQxjAai0EdpPj2ZFNCBpfn+X9wrb8x4ZvvzPF9iPtrDHeScT40s\nhjBu4bqw7NTYjragqi1GNFT3i1iBz3k3Cy+5qNMCgYEAqVnWjCF9Yk77TzXaKhr3\nIVZS7XnRg9GVyQHYW6xa61EFSTIscvohY1iwqRW2GGOED9bFmxFWvIXvDmb1+SRR\nKFtTgXp9JpRiOpYcjzBhzlm/ofvgZZS+auk4ZoCHUiPO6WU4ja+CqFo7RzVXdDpk\nbVwVPZVhi7KLSxYz8qF1LEcCgYEAlQT0V5qVrpPD5GXTGPpnS58zSH2RPBEIWuL8\ncOYKscNlgBNk/vSwGu8iS2A9j7oKKHuV+K2iJ31hYcuvHwkgIGzw5WgaPDFC9z0a\n8Uv/XbpL3RsyaWDxeFfbGaeJIrJu9rJWMe49+tISGufI2+K5ap3pb0hGZPuJkDWf\nfwGYwJECgYEAzDXY3sdGGUorxUkPmXgnRfRESSB/grYcBQhwCQK20vg8HJmmtVDL\nGSxYGl9XOBf6si3Z7oUC5Vbudv7xErrFyM2kkjHiEDwjqKEpVoVaJ/BYgts8qSaj\nM6RnB64qGVFRgOFbxU0M3fdqzDToRwkTj5BHpsHr+iWiCZNS/OEqH0c=\n-----END RSA PRIVATE KEY-----\n-----BEGIN CERTIFICATE-----\nMIIDozCCAougAwIBAgIJAKxXHJcpC3WZMA0GCSqGSIb3DQEBBQUAMD8xGDAWBgNV\nBAMUDyoubXJtYWNoaW5lLm5ldDEWMBQGA1UEChMNbXJtYWNoaW5lLm5ldDELMAkG\nA1UEBhMCVVMwHhcNMTYwOTIxMTE0MDM3WhcNMTkwOTA2MTE0MDM3WjA/MRgwFgYD\nVQQDFA8qLm1ybWFjaGluZS5uZXQxFjAUBgNVBAoTDW1ybWFjaGluZS5uZXQxCzAJ\nBgNVBAYTAlVTMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAr5tRcmps\njocfWgJ6t5HEnfRHx/NY/akx2dbOPUAAjZr9e//Tf0XyNkNNgwyLP4K08yJmeZjG\nKsrU1CfUy6NCLzr9yH/gH/xBVw+2r4kcpjRJSm+1owQM5wOilZuy5J+R9AYroWwk\n7psu8ytLxEJRH44g04V3FZ4Zdb8ARwLp28GlJVv3c8rJGOwmA/iwmMn1sVaz2zJH\nU80xiBzT9EXFWEYy1heEC5tVzgoi4tc++2xz4QvtNsm4pTEtRUgCiR5sOqkUMYP5\n2cpZvQp+yn3wPXVYgDPNj+Hv20rFnyuNbQxk3We6tjb/3CvPmxrh+qrpBFJVCqjb\n0QikJCrvZ1TiyQIDAQABo4GhMIGeMB0GA1UdDgQWBBQn6gNcykHO2hoj7DWWXwFb\nNRyoYzBvBgNVHSMEaDBmgBQn6gNcykHO2hoj7DWWXwFbNRyoY6FDpEEwPzEYMBYG\nA1UEAxQPKi5tcm1hY2hpbmUubmV0MRYwFAYDVQQKEw1tcm1hY2hpbmUubmV0MQsw\nCQYDVQQGEwJVU4IJAKxXHJcpC3WZMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEF\nBQADggEBAH37uN8YdVZV4SRsO6IcDTjF7anaw7BIJ7dc/3aRaCqay0c2Edw39Qh+\nn0J8geawzOh1fDIgo86L5lSAPhm1E30N9s2dHACFPIuRzkQfurjuTgVkSoGW/jhH\noZCkuv4lX8qGmFagu1eaJbY3X0xa2E7fD9hAV6QUDCMxbq51i6BDrcAapqkNBfON\nQi1IK6dHCv+JQN0ypMD/16WHl5udYPspy2dF3O4zaEqxlQhYMzC5c5BHFLxn0qX4\nXNFMVfWmhv38cYigXdOhyBYFzV4wYOi+ZZd0R3BPMUB0najV5qAxD/DdJjAgdiT2\nFuL+ri3xd5w4W9/lFpbHr2/EgPVHDMc=\n-----END CERTIFICATE-----\n
-  links:
-    - couchpotatoserver
-    - nzbget
-    - sickrage
-    - transmission
-  ports:
-    - "80:80"
-    - "443:443"
-  roles:
-    - global
-nzbget:
-  image: 'mrmachine/nzbget:latest'
-  autoredeploy: true
-  environment:
-    - SERVER1_PASSWORD=
-    - SERVER1_USERNAME=
-    - VIRTUAL_HOST=https://nzbget.mrmachine.net
-  ports:
-    - '6789:6789'
-  restart: always
-  volumes:
-    - '/home/tailee/dataset:/mnt/storage'
-sickrage:
-  image: 'mrmachine/sickrage:latest'
-  autoredeploy: true
-  environment:
-    - BTN_API_KEY=
-    - DISABLE_AUTOUPDATE=yes
-    - NZBS_ORG_API_KEY=
-    - PLEX_PASSWORD=
-    - PLEX_USERNAME=
+    - PLEX_PASSWORD= # Required
+    - PLEX_TOKEN=
+    - PLEX_USERNAME= # Required
     - PUSHOVER_API_KEY=
     - PUSHOVER_USER_KEY=
-    - VIRTUAL_HOST=https://sickrage.mrmachine.net
-  links:
-    - nzbget
-    - transmission
+    - REQUIREMENTS=Movies:2.0:;TV Shows::240 # {category:ratio:hours};...
+    - SERVER1_HOST=
+    - SERVER1_NAME=
+    - SERVER1_PASSWORD=
+    - SERVER1_USERNAME=
   ports:
-    - '8081:8081'
+    - '443:443'
+    - '32400:32400'
+    - '51413:51413'
+  privileged: true
   restart: always
+  tags:
+    - plex-cloud-encfs
   volumes:
-    - '/home/tailee/dataset:/mnt/storage'
-transmission:
-  image: 'mrmachine/transmission:latest'
-  autoredeploy: true
-  environment:
-    - EXCLUDE_PORTS=51413
-    - VIRTUAL_HOST=https://transmission.mrmachine.net
-  ports:
-    - '9091:9091'
-  restart: always
-  volumes:
-    - '/home/tailee/dataset:/mnt/storage'
+    - /mnt/local-storage
+    - /opt/var
+  volumes_from:
+    - letsencrypt

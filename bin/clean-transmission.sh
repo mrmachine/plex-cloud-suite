@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Remove torrents and data from Transmission when ratio or seeding time
 # requirements have been satisfied.
