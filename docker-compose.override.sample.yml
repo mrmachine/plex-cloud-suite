@@ -1,15 +1,12 @@
 version: "2"
 services:
-  letsencrypt:
-    environment:
-      DOMAINS: plex.EXAMPLE.COM,couchpotato.EXAMPLE.COM,nzbget.EXAMPLE.COM,sickrage.EXAMPLE.COM,transmission.EXAMPLE.COM # Required
-      EMAIL: # Required
   plex-cloud-encfs:
     environment:
       BASIC_AUTH_PASSWORD: # Required
       BASIC_AUTH_USERNAME: # Required
       BTN_API_KEY:
       DOMAIN: # Required
+      EMAIL: # Required
       ENCFS_PASSWORD: # Required
       NZBS_ORG_API_KEY:
       PASSTHEPOPCORN_PASSKEY:

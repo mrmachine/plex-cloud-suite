@@ -1,11 +1,5 @@
 version: "2"
 services:
-  letsencrypt:
-    build: letsencrypt
-    image: mrmachine/letsencrypt:latest
-    ports:
-      - '80:80'
-    restart: always
   plex-cloud-encfs:
     build: .
     cap_add:
@@ -13,6 +7,7 @@ services:
     command: supervisor.sh
     image: 'mrmachine/plex-cloud-encfs:latest'
     ports:
+      - '80:80'
       - '443:443'
       - '32400:32400'
       - '51413:51413'
@@ -23,5 +18,3 @@ services:
       - ./etc:/opt/etc
       - ./local-storage:/mnt/local-storage
       - ./var:/opt/var
-    volumes_from:
-      - letsencrypt

@@ -29,9 +29,9 @@ The following additional apps are included (and already configured to work toget
 
     After `acd-cli` and `encfs` are configured, the `plex-cloud-encfs` container's entrypoint script will continue automatically, and you can close your interactive terminal.
 
- 5. Navigate to the `Endpoints` section of the stack and take note of the address for the service endpoint. Something like: `http://letsencrypt.{stack-name}.{sha}.svc.dockerapp.io:80/`
+ 5. Navigate to the `Endpoints` section of the stack and take note of the address for the service endpoint. Something like: `plex-cloud-encfs.{stack-name}.{sha}.svc.dockerapp.io`
 
- 6. Configure wildcard or individual subdomain CNAME records on your domain that point to the service endpoint noted above. Something like: `letsencrypt.{stack-name}.{sha}.svc.dockerapp.io`
+ 6. Configure wildcard or individual subdomain CNAME records that point to the service endpoint noted above, for `couchpotato`, `nzbget`, `plex`, `sickrage`, and `transmission` on your domain.
 
 Note that on Docker Cloud, persistent data (personal configuration, library data) is stored on the node. If services are redeployed to a different node, this data will be lost.
 
@@ -52,13 +52,7 @@ Note that on Docker Cloud, persistent data (personal configuration, library data
 
         $ docker-compose up -d
 
- 4. Configure wildcard or individual subdomain DNS records on your domain that point to your IP address, or access (from the same machine) via `*.lvh.me` (a wildcard DNS record that points to `127.0.0.1`):
-
-      * http://couchpotato.lvh.me
-      * http://nzbget.lvh.me
-      * http://plex.lvh.me
-      * http://sickrage.lvh.me
-      * http://transmission.lvh.me
+ 4. Configure wildcard or individual subdomain DNS records that point to your IP address, for `couchpotato`, `nzbget`, `plex`, `sickrage`, and `transmission` on your domain.
 
 # Required environment variables
 
@@ -66,19 +60,15 @@ The following environment variables *must* be provided:
 
   * `BASIC_AUTH_USERNAME` and `BASIC_AUTH_PASSWORD` -- All services except Plex Media Server (which implements its own authentication) will be protected by basic auth using these credentials.
 
+  * `DOMAIN` and `EMAIL` -- The domain on which the individual app subdomains are configured, and an email address where certificate expiration notices should be sent.
+
   * `ENCFS_PASSWORD` -- Your media library will be encrypted on Amazon Cloud Drive using this password. You will never need to type it interactively, so make it strong. For example, 50+ random characters including uppercase, lowercase, numbers and symbols.
 
   * `PLEX_USERNAME` and `PLEX_PASSWORD` -- These are used to obtain an authentication token (which you can provide as `PLEX_TOKEN` instead, if already known) which links this Plex Media Server to your Plex account.
 
-  * `DOMAINS` -- DNS must be configured to ensure the server is reachable at these domains.
-
-  * `EMAIL` -- SSL certificate expiration notices will be sent to this email address.
-
 # Secure access over HTTPS
 
-All services can only be accessed remotely over HTTPS.
-
-SSL certificates will be created and renewed automatically for the domains listed in the `DOMAINS` environment variable, as long as the `letsencrypt` service is reachable at those domains.
+All services can only be accessed remotely over HTTPS. SSL certificates will be created and renewed automatically for app subdomains under the domain given in the `DOMAIN` environment variable.
 
 # EncFS storage on Amazon Cloud Drive
 
@@ -150,12 +140,6 @@ You will need to further configure them with your own personal preferences. For 
   * Torrent tracker credentials
   * Usenet indexer/provider credentials
   * Wanted movies and TV shows
-
-All the additional apps run by default. If you only want some of them, you can specify just the ones you want in the Docker Cloud stack or `docker-compose.override.yml` file:
-
-    plex-cloud-encfs:
-      environment:
-        SUPERVISORD_INCLUDE_FILES: couchpotatoserver.conf nzbget.conf sickrage.conf transmission.conf
 
 ## Plex Media Server
 

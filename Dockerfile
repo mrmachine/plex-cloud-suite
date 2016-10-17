@@ -9,6 +9,8 @@ RUN apt-get update \
         ffmpeg \
         inotify-tools \
         jq \
+        letsencrypt \
+        nano \
         nginx \
         nzbget \
         p7zip \
@@ -26,6 +28,7 @@ RUN apt-get update \
         transmission-daemon \
         unionfs-fuse \
         unrar-free \
+        vim-tiny \
     && rm -rf /var/lib/apt/lists/*
 
 ENV PMS_VERSION=1.2.2.2857-d34b464
@@ -46,6 +49,10 @@ ENV PATH=/opt/bin:$PATH
 EXPOSE 443
 EXPOSE 32400
 EXPOSE 51413 51413/udp
+
+VOLUME /etc/letsencrypt
+VOLUME /mnt/local-storage
+VOLUME /opt/var
 
 ENTRYPOINT ["tini", "--", "entrypoint.sh"]
 CMD ["supervisor.sh"]
