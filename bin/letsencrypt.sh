@@ -11,7 +11,7 @@ mkdir -p /opt/www
 
 # Create or renew certificate, every 12 hours.
 while true; do
-	if letsencrypt certonly \
+	if certbot certonly \
 			--agree-tos \
 			--domains "plex.$DOMAIN,couchpotato.$DOMAIN,nzbget.$DOMAIN,sickrage.$DOMAIN,transmission.$DOMAIN," \
 			--email "$EMAIL" \

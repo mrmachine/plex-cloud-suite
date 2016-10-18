@@ -9,7 +9,6 @@ RUN apt-get update \
         ffmpeg \
         inotify-tools \
         jq \
-        letsencrypt \
         nano \
         nginx \
         nzbget \
@@ -29,6 +28,13 @@ RUN apt-get update \
         unionfs-fuse \
         unrar-free \
         vim-tiny \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN cd /usr/local/bin \
+    && wget -nv https://dl.eff.org/certbot-auto \
+    && chmod a+x certbot-auto \
+    && certbot-auto --non-interactive --version \
+    && ln -s /root/.local/share/letsencrypt/bin/certbot /usr/local/bin/certbot \
     && rm -rf /var/lib/apt/lists/*
 
 ENV PMS_VERSION=1.2.2.2857-d34b464
