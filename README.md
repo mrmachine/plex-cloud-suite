@@ -159,3 +159,8 @@ Completed torrents and data will be removed from Transmission when ratio or seed
     REQUIREMENTS="Movies:2.0:;TV Shows::240"
 
 By default, movies will be removed after a seed ratio of 2.0 and TV shows will be removed after a seed time of 240 hours (10 days).
+
+# TODO
+
+  * [ ] Schedule `local-to-acd.py` execution.
+  * [ ] Simplify authorisation and configuration of `acd-cli` and `encfs` on first run.
