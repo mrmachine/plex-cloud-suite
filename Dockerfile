@@ -50,6 +50,9 @@ RUN chmod +x /usr/local/bin/tini
 
 RUN pip3 install --no-cache-dir acdcli==0.3.2
 
+# Fix broken symlink for NZBGet.
+RUN ln -fs ../../../javascript/raphael/raphael-min.js /usr/share/nzbget/webui/lib/raphael.min.js
+
 ENV PATH=/opt/bin:$PATH
 
 EXPOSE 443
