@@ -13,7 +13,7 @@ mkdir -p /opt/www
 while true; do
 	if certbot certonly \
 			--agree-tos \
-			--domains "plex.$DOMAIN,couchpotato.$DOMAIN,nzbget.$DOMAIN,sickrage.$DOMAIN,transmission.$DOMAIN," \
+			--domains "plex.$DOMAIN,couchpotato.$DOMAIN,nzbget.$DOMAIN,sickrage.$DOMAIN,transmission.$DOMAIN" \
 			--email "$EMAIL" \
 			--expand \
 			--noninteractive \
