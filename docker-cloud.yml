@@ -28,6 +28,7 @@ plex-cloud-encfs:
     - '443:443'
     - '32400:32400'
     - '51413:51413'
+    - '51413:51413/udp'
   privileged: true
   restart: always
   tags:
