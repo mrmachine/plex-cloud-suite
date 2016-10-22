@@ -68,7 +68,7 @@ fi
 
 # Mount UnionFS filesystem.
 if [[ -z "$(mount | grep /mnt/storage)" ]]; then
-	unionfs-fuse -o cow /mnt/local-storage=RW:/mnt/acd-storage=RO /mnt/storage
+	unionfs-fuse -o cow /mnt/local-storage=RW:/mnt/acd-storage=RW /mnt/storage
 fi
 
 # Generate CouchPotatoServer API key.
