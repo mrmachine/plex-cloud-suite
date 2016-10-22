@@ -3,6 +3,7 @@ FROM buildpack-deps:xenial
 RUN apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends \
+        anacron \
         apache2-utils \
         bc \
         encfs \
