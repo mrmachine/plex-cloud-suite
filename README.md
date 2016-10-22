@@ -108,7 +108,7 @@ All the apps are configured to work together, and some of their default settings
       * Enable library management
       * Enable Pushover notifications
       * Prefer NZBs over torrents
-      * Require 720P quality
+      * Require 1080P WEB-DL, DVDrip, or SDTV quality
       * Enable automation
           * Download all Action, Drama, Horror, or Sci-Fi rated over 8.0 since 1979
           * Ignore Comedy, Romance
