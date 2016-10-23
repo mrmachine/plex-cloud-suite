@@ -23,6 +23,7 @@ plex-cloud-encfs:
     - SERVER1_NAME=
     - SERVER1_PASSWORD=
     - SERVER1_USERNAME=
+    - TZ=Australia/Sydney # Required
   ports:
     - '80:80'
     - '443:443'
