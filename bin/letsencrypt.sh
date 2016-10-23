@@ -23,5 +23,6 @@ while true; do
 		ln -fs "$LIVE_CERT_FOLDER/privkey.pem" /opt/var/ssl/key.pem
 		nginx -s reload
 	fi
+	echo "Sleeping for 43200 seconds (12 hours) before renewing SSL certificates."
 	sleep 43200  # 12 hours
 done
