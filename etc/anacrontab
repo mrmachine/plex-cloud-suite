@@ -1,2 +1,0 @@
-1 1   letsencrypt  source /etc/environment; /opt/bin/letsencrypt.sh
-1 720 local-to-acd source /etc/environment; /opt/bin/local-to-acd.sh
