@@ -23,6 +23,7 @@ RUN apt-get update \
         python-setuptools \
         python3-pip \
         python3-setuptools \
+        rsync \
         supervisor \
         transmission-cli \
         transmission-daemon \
