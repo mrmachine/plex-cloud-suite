@@ -57,6 +57,7 @@ RUN ln -fs ../../../javascript/raphael/raphael-min.js /usr/share/nzbget/webui/li
 
 ENV PATH=/opt/bin:$PATH
 
+EXPOSE 80
 EXPOSE 443
 EXPOSE 32400
 EXPOSE 51413 51413/udp
