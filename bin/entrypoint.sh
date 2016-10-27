@@ -45,13 +45,12 @@ fi
 # Create required directories.
 mkdir -p /mnt/acd
 mkdir -p /mnt/acd-storage
+mkdir -p /mnt/acd-storage/'Home Videos'
+mkdir -p /mnt/acd-storage/Movies
+mkdir -p /mnt/acd-storage/Music
+mkdir -p /mnt/acd-storage/Photos
+mkdir -p /mnt/acd-storage/'TV Shows'
 mkdir -p /mnt/local-storage
-mkdir -p /mnt/local-storage/'Home Videos'
-mkdir -p /mnt/local-storage/Movies
-mkdir -p /mnt/local-storage/Music
-mkdir -p /mnt/local-storage/Photos
-mkdir -p /mnt/local-storage/'TV Shows'
-mkdir -p /mnt/storage
 mkdir -p /opt/var/couchpotatoserver
 mkdir -p /opt/var/sickrage
 
@@ -64,11 +63,6 @@ fi
 # Mount EncFS filesystem.
 if [[ -z "$(mount | grep /mnt/acd-storage)" ]]; then
 	encfs --extpass=extpass.sh "/mnt/acd/$ACD_STORAGE_DIR" /mnt/acd-storage
-fi
-
-# Mount UnionFS filesystem.
-if [[ -z "$(mount | grep /mnt/storage)" ]]; then
-	unionfs-fuse -o cow /mnt/local-storage=RW:/mnt/acd-storage=RW /mnt/storage
 fi
 
 # Generate CouchPotatoServer API key.
