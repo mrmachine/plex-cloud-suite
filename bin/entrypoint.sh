@@ -42,17 +42,10 @@ if [[ ! -t 0 ]]; then
 	echo 'Done!'
 fi
 
-# Create required directories.
+# Create directories for mount points.
 mkdir -p /mnt/acd
 mkdir -p /mnt/acd-storage
-mkdir -p /mnt/acd-storage/'Home Videos'
-mkdir -p /mnt/acd-storage/Movies
-mkdir -p /mnt/acd-storage/Music
-mkdir -p /mnt/acd-storage/Photos
-mkdir -p /mnt/acd-storage/'TV Shows'
 mkdir -p /mnt/local-storage
-mkdir -p /opt/var/couchpotatoserver
-mkdir -p /opt/var/sickrage
 
 # Mount Amazon Cloud Drive.
 acd_cli sync
@@ -64,6 +57,15 @@ fi
 if [[ -z "$(mount | grep /mnt/acd-storage)" ]]; then
 	encfs --extpass=extpass.sh "/mnt/acd/$ACD_STORAGE_DIR" /mnt/acd-storage
 fi
+
+# Create other required directories.
+mkdir -p /mnt/acd-storage/'Home Videos'
+mkdir -p /mnt/acd-storage/Movies
+mkdir -p /mnt/acd-storage/Music
+mkdir -p /mnt/acd-storage/Photos
+mkdir -p /mnt/acd-storage/'TV Shows'
+mkdir -p /opt/var/couchpotatoserver
+mkdir -p /opt/var/sickrage
 
 # Generate CouchPotatoServer API key.
 if [[ ! -f /opt/var/couchpotatoserver/api_key.txt ]]; then
