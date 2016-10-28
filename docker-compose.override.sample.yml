@@ -2,6 +2,8 @@ version: "2"
 services:
   plex-cloud-encfs:
     environment:
+      ACD_OAUTH_DATA: | # Required
+        # Download from: https://tensile-runway-92512.appspot.com/
       BASIC_AUTH_PASSWORD: # Required
       BASIC_AUTH_USERNAME: # Required
       BTN_API_KEY:

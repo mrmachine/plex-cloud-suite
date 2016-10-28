@@ -58,6 +58,8 @@ Note that on Docker Cloud, persistent data (personal configuration, library data
 
 The following environment variables *must* be provided:
 
+  * `ACD_OAUTH_DATA` -- Login with your Amazon credentials at https://tensile-runway-92512.appspot.com/ to download an `oauth_data` file for `acd-cli`. Add the contents of the file to your `docker-cloud.yml` or `docker-compose.yml` file.
+
   * `BASIC_AUTH_USERNAME` and `BASIC_AUTH_PASSWORD` -- All services except Plex Media Server (which implements its own authentication) will be protected by basic auth using these credentials.
 
   * `DOMAIN` and `EMAIL` -- The domain on which the individual app subdomains are configured, and an email address where certificate expiration notices should be sent.
