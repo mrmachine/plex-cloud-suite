@@ -1,4 +1,5 @@
 **/.DS_Store
+docker-cloud.*.yml
 docker-compose.override.yml
 etc/letsencrypt/
 local-storage/
