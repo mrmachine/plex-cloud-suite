@@ -82,7 +82,4 @@ export SICKRAGE_API_KEY="$(cat /opt/var/sickrage/api_key.txt)"
 # Set basic auth credentials.
 htpasswd -bc /opt/var/htpasswd "$BASIC_AUTH_USERNAME" "$BASIC_AUTH_PASSWORD"
 
-# Save environment, so we can source it in cron jobs.
-env > /etc/environment
-
 exec "${@:-bash.sh}"
