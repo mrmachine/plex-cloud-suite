@@ -2,7 +2,7 @@ version: "2"
 services:
   plex-cloud-encfs:
     environment:
-      ACD_OAUTH_DATA: | # Required
+      ACD_OAUTH_DATA: | # Required - download from https://tensile-runway-92512.appspot.com/
         # Download from: https://tensile-runway-92512.appspot.com/
       BASIC_AUTH_PASSWORD: # Required
       BASIC_AUTH_USERNAME: # Required
@@ -19,7 +19,7 @@ services:
       PLEX_USERNAME: # Required
       PUSHOVER_API_KEY:
       PUSHOVER_USER_KEY:
-      REQUIREMENTS: 'Movies:2.0:;TV Shows::240' # {category:ratio:hours};...
+      REQUIREMENTS: 'Movies:2.0:;TV Shows::240' # Required - {category:ratio:hours};...
       SERVER1_HOST:
       SERVER1_NAME:
       SERVER1_PASSWORD:
