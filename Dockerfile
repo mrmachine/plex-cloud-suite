@@ -12,6 +12,7 @@ RUN apt-get update \
         encfs \
         ffmpeg \
         jq \
+        less \
         nano \
         nginx \
         nzbget \
