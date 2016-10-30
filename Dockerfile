@@ -1,6 +1,10 @@
 FROM buildpack-deps:xenial
 
 RUN apt-get update \
+	&& apt-get install -y --no-install-recommends \
+		software-properties-common \
+	&& apt-add-repository multiverse \
+	&& apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends \
         anacron \
@@ -28,7 +32,7 @@ RUN apt-get update \
         transmission-cli \
         transmission-daemon \
         unionfs-fuse \
-        unrar-free \
+        unrar \
         vim-tiny \
     && rm -rf /var/lib/apt/lists/*
 
