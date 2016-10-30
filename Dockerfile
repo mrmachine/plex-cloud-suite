@@ -7,12 +7,10 @@ RUN apt-get update \
 	&& apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends \
-        anacron \
         apache2-utils \
         bc \
         encfs \
         ffmpeg \
-        inotify-tools \
         jq \
         nano \
         nginx \
@@ -27,7 +25,6 @@ RUN apt-get update \
         python-setuptools \
         python3-pip \
         python3-setuptools \
-        rsync \
         supervisor \
         transmission-cli \
         transmission-daemon \
