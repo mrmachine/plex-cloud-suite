@@ -7,9 +7,11 @@ services:
       BASIC_AUTH_PASSWORD: # Required
       BASIC_AUTH_USERNAME: # Required
       BTN_API_KEY:
+      DOGNZB_API_KEY:
       DOMAIN: # Required
       EMAIL: # Required
       ENCFS_PASSWORD: # Required
+      NZBGEEK_API_KEY:
       NZBS_ORG_API_KEY:
       PASSTHEPOPCORN_PASSKEY:
       PASSTHEPOPCORN_PASSWORD:

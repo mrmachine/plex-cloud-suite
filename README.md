@@ -105,7 +105,7 @@ All the apps are configured to work together, and some of their default settings
           * File name format: `<thename> (<year>) <quality><cd>.<ext>`
           * Folder name format: `<thename> (<year>)`
       * Enable NZBGet, Plex Media Server, and Transmission integration
-      * Enable NZBs.org indexer
+      * Enable DogNZB, GeekNZB, NZBs.org and Pass The Popcorn searchers
       * Disable public torrent trackers
       * Enable library management
       * Enable Pushover notifications
@@ -122,7 +122,7 @@ All the apps are configured to work together, and some of their default settings
   * Plex Media Server
       * Friendly name: `Plex Cloud EncFS`
   * Sick Rage
-      * Enable BTN and NZBs.org providers
+      * Enable BTN, DogNZB, GeekNZB, and NZBs.org providers
       * Enable failed download handling (via `nzbToMedia`)
       * Enable auto-update
       * Enable debug logging
