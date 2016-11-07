@@ -90,10 +90,6 @@ The unencrypted storage directory is mounted at `/mnt/acd-storage`.
 
 Remote storage like Amazon Cloud Drive is good enough to store and stream media, but is not ideal for downloading and extracting files. For that, we have `/mnt/local-storage`.
 
-A UnionFS volume is mounted at `/mnt/storage`, which provides seamless read/write access to `/mnt/local-storage` and read-only access to `/mnt/acd-storage`. This makes newly downloaded files immediately available to Plex Media Server.
-
-The `local-to-acd.py` script is executed on a schedule, and will move all media library files from `/mnt/local-storage` to `/mnt/acd-storage`.
-
 # Configuration
 
 All the apps are configured to work together, and some of their default settings have been tweaked according to my own personal preferences. Notably:
@@ -101,7 +97,7 @@ All the apps are configured to work together, and some of their default settings
   * Couch Potato
       * Enable dark theme
       * Enable debug logging
-      * Rename and move downloaded files to `/mnt/storage/Movies`
+      * Rename and move downloaded files to `/mnt/acd-storage/Movies`
           * File name format: `<thename> (<year>) <quality><cd>.<ext>`
           * Folder name format: `<thename> (<year>)`
       * Enable NZBGet, Plex Media Server, and Transmission integration
@@ -127,7 +123,7 @@ All the apps are configured to work together, and some of their default settings
       * Enable auto-update
       * Enable debug logging
       * Flatten folders by default
-      * Rename and move downloaded files to `/mnt/storage/TV Shows`
+      * Rename and move downloaded files to `/mnt/acd-storage/TV Shows`
       	  * File naming pattern: `%Sx%0E %EN %QN`
       * Require 720P or DVD-Rip quality
   * Transmission
@@ -147,11 +143,11 @@ You will need to further configure them with your own personal preferences. For 
 
 On first run, there are no automatically configured media libraries. When you add a library, be sure to choose from the existing library directories:
 
-  * `/mnt/storage/Home Videos`
-  * `/mnt/storage/Movies`
-  * `/mnt/storage/Music`
-  * `/mnt/storage/Photos`
-  * `/mnt/storage/TV Shows`
+  * `/mnt/acd-storage/Home Videos`
+  * `/mnt/acd-storage/Movies`
+  * `/mnt/acd-storage/Music`
+  * `/mnt/acd-storage/Photos`
+  * `/mnt/acd-storage/TV Shows`
 
 ## Transmission
 

@@ -1,5 +1,5 @@
 {
-    "download-dir": "/mnt/storage/Downloads/Transmission",
+    "download-dir": "/mnt/local-storage/Downloads/Transmission",
     "rpc-whitelist-enabled": false,
     "script-torrent-done-enabled": true,
     "script-torrent-done-filename": "/opt/bin/torrent-done.sh"
