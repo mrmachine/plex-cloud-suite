@@ -34,12 +34,11 @@ fi
 # Create storage directory to avoid interactive prompt.
 mkdir -p "/mnt/acd/$ACD_STORAGE_DIR"
 
-# Create and mount EncFS filesystem, with pre-configured paranoia mode.
 if [[ ! -f "/mnt/acd/$ACD_STORAGE_DIR/.encfs6.xml" ]]; then
+	# Create and mount EncFS filesystem, with pre-configured paranoia mode.
 	echo p | encfs --extpass=extpass.sh "/mnt/acd/$ACD_STORAGE_DIR" /mnt/acd-storage
-
-# Mount EncFS filesystem.
 elif [[ -z "$(mount | grep /mnt/acd-storage)" ]]; then
+	# Mount EncFS filesystem.
 	encfs --extpass=extpass.sh "/mnt/acd/$ACD_STORAGE_DIR" /mnt/acd-storage
 fi
 
