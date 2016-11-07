@@ -42,7 +42,7 @@ RUN cd /usr/local/bin \
     && ln -s /root/.local/share/letsencrypt/bin/certbot /usr/local/bin/certbot \
     && rm -rf /var/lib/apt/lists/*
 
-ENV PMS_VERSION=1.2.2.2857-d34b464
+ENV PMS_VERSION=1.2.6.2975-9394c87
 RUN URL="https://downloads.plex.tv/plex-media-server/${PMS_VERSION}/plexmediaserver_${PMS_VERSION}_amd64.deb"; FILE="$(mktemp)"; wget -nv -O "$FILE" "$URL" \
     && dpkg -i "$FILE"; rm "$FILE"
 
