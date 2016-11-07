@@ -4,7 +4,6 @@ set -e
 
 # Do daily maintenance at startup.
 letsencrypt.sh
-rsync-local-storage-to-acd.sh
 
 while true; do
 	# Sleep until 3AM. See: http://stackoverflow.com/a/19067658
@@ -14,5 +13,4 @@ while true; do
 
 	# Do daily maintenance at 3AM.
 	letsencrypt.sh
-	rsync-local-storage-to-acd.sh
 done
