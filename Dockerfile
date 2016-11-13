@@ -15,7 +15,6 @@ RUN apt-get update \
         less \
         nano \
         nginx \
-        nzbget \
         p7zip \
         python-babel \
         python-cryptography \
@@ -54,9 +53,6 @@ RUN wget -nv -O /usr/local/bin/tini "https://github.com/krallin/tini/releases/do
 RUN chmod +x /usr/local/bin/tini
 
 RUN pip3 install --no-cache-dir acdcli==0.3.2
-
-# Fix broken symlink for NZBGet.
-RUN ln -fs ../../../javascript/raphael/raphael-min.js /usr/share/nzbget/webui/lib/raphael.min.js
 
 ENV PATH=/opt/bin:$PATH
 
