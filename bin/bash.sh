@@ -11,7 +11,7 @@ want to run:
 	couchpotatoserver.sh
 	entrypoint.sh
 	extpass.sh
-	local-to-acd.sh
+	letsencrypt.sh
 	nginx.sh
 	nzbget.sh
 	plexmediaserver.sh
