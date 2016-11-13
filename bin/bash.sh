@@ -3,7 +3,7 @@
 set -e
 
 cat <<EOF
-You are running an interactive BASH shell. Here is a list of commands you might
+You are running an interactive Bash shell. Here is a list of commands you might
 want to run:
 
 	bash.sh
