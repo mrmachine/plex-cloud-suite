@@ -10,14 +10,14 @@ REQUIREMENTS="${REQUIREMENTS:-Movies:2.0:;TV Shows::240}"
 IFS=';' read -r -a REQUIREMENTS <<< "$REQUIREMENTS"
 
 # Use sed to get list of torrent IDs.
-for ID in $(transmission-remote --list | sed -nr 's/^ *(\d+).*/\1/p')
+for ID in $(transmission-remote --list | sed -nr 's/^ *([0-9]+).*/\1/p')
 do
     # Use sed to get torrent info.
     NAME=$(transmission-remote --torrent $ID --info | sed -nr 's/.*Name: (.+)/\1/p')
     LOCATION=$(transmission-remote --torrent $ID --info | sed -nr 's/.*Location:.*[/](.+)/\1/p')
-    PERCENT_DONE=$(transmission-remote --torrent $ID --info | sed -nr 's/.*Percent Done: (\d+).*/\1/p')
+    PERCENT_DONE=$(transmission-remote --torrent $ID --info | sed -nr 's/.*Percent Done: ([0-9]+).*/\1/p')
     RATIO=$(transmission-remote --torrent $ID --info | sed -nr 's/.*Ratio: ([.0-9]+)/\1/p')
-    SEEDING_TIME=$(transmission-remote --torrent $ID --info | sed -nr 's/.*Seeding Time:.*[(](\d+).*/\1/p')
+    SEEDING_TIME=$(transmission-remote --torrent $ID --info | sed -nr 's/.*Seeding Time:.*[(]([0-9]+).*/\1/p')
 
     # Convert seconds to hours.
     SEEDING_TIME=$(echo "${SEEDING_TIME:-0} / 60 / 60" | bc)
