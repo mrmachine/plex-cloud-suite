@@ -90,7 +90,7 @@ The unencrypted storage directory is mounted at `/mnt/acd-storage`.
 
 Remote storage like Amazon Cloud Drive is good enough to store and stream media, but is not ideal for downloading and extracting files. For that, we have `/mnt/local-storage`.
 
-A UnionFS volume is mounted at `/mnt/storage`, which provides seamless read/write access to `/mnt/local-storage` and read-only access to `/mnt/acd-storage`. This makes newly downloaded files immediately available to Plex Media Server.
+A UnionFS volume is mounted at `/mnt/storage`, which provides seamless read/write access to `/mnt/local-storage` and `/mnt/acd-storage`. This makes newly downloaded files immediately available to Plex Media Server.
 
 The `local-to-acd.py` script is executed on a schedule, and will move all media library files from `/mnt/local-storage` to `/mnt/acd-storage`.
 
