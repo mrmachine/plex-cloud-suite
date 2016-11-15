@@ -3,8 +3,8 @@
 set -e
 
 # Create required directories.
-mkdir -p /mnt/local-storage/Downloads/Process/Movies
-mkdir -p /mnt/acd-storage/Movies
+mkdir -p /mnt/storage/Downloads/Process/Movies
+mkdir -p /mnt/storage/Movies
 mkdir -p /opt/var/couchpotatoserver/src
 
 # Get source code.

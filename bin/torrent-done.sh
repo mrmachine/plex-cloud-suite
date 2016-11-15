@@ -29,10 +29,10 @@ DOWNLOAD_DIR=$(jq -r '.["download-dir"]' /opt/var/transmission/settings.json)
 if [[ "$TORRENT_PATH" == "$DOWNLOAD_DIR"* ]]; then
 	# Strip the Transmission download directory prefix from the torrent path to
 	# get a relative path.
-	DST="/mnt/local-storage/Downloads/Process/${TORRENT_PATH#$DOWNLOAD_DIR}"
+	DST="/mnt/storage/Downloads/Process/${TORRENT_PATH#$DOWNLOAD_DIR}"
 else
 	# Fallback to torrent name in process downloads directory.
-	DST="/mnt/local-storage/Downloads/Process/$TR_TORRENT_NAME"
+	DST="/mnt/storage/Downloads/Process/$TR_TORRENT_NAME"
 fi
 
 cat <<EOF
