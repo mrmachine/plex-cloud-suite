@@ -23,8 +23,6 @@ RUN apt-get update \
         python-openssl \
         python-pip \
         python-setuptools \
-        python3-pip \
-        python3-setuptools \
         rsync \
         supervisor \
         transmission-cli \
@@ -32,6 +30,14 @@ RUN apt-get update \
         unionfs-fuse \
         unrar \
         vim-tiny \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN export GCSFUSE_REPO=gcsfuse-`lsb_release -c -s` \
+    && echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | tee /etc/apt/sources.list.d/gcsfuse.list \
+    && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - \
+    && apt-get update \
+    && apt-get install --no-install-recommends \
+        gcsfuse \
     && rm -rf /var/lib/apt/lists/*
 
 RUN cd /usr/local/bin \
@@ -53,7 +59,6 @@ RUN wget -nv -O /usr/local/bin/tini "https://github.com/krallin/tini/releases/do
 RUN chmod +x /usr/local/bin/tini
 
 RUN pip install --no-cache-dir hardlink==0.2
-RUN pip3 install --no-cache-dir acdcli==0.3.2
 
 ENV PATH=/opt/bin:$PATH
 

@@ -3,7 +3,7 @@
 set -e
 
 # Fail loudly when required environment variables are missing.
-for var in ACD_OAUTH_DATA BASIC_AUTH_PASSWORD BASIC_AUTH_USERNAME DOMAIN EMAIL ENCFS_PASSWORD PLEX_PASSWORD PLEX_USERNAME; do
+for var in BASIC_AUTH_PASSWORD BASIC_AUTH_USERNAME DOMAIN EMAIL ENCFS_PASSWORD GOOGLE_APPLICATION_CREDENTIALS PLEX_PASSWORD PLEX_USERNAME; do
 	eval [[ -z \${$var+1} ]] && {
 		>&2 echo "ERROR: Required environment variable is missing: $var"
 		exit 1
@@ -11,13 +11,11 @@ for var in ACD_OAUTH_DATA BASIC_AUTH_PASSWORD BASIC_AUTH_USERNAME DOMAIN EMAIL E
 done
 
 # Environment.
-export ACD_CLI_CACHE_PATH=/opt/var/acd_cli
-export ACD_STORAGE_DIR="${ACD_STORAGE_DIR:-PCE}"  # Relative to ACD root
+export PCE_STORAGE_DIR="${PCE_STORAGE_DIR:-PCE}"  # Relative to ACD root
 
 # Create required local directories.
-mkdir -p "$ACD_CLI_CACHE_PATH"
-mkdir -p /mnt/acd
-mkdir -p /mnt/acd-storage
+mkdir -p /mnt/gcp
+mkdir -p /mnt/gcp-storage
 mkdir -p /mnt/local-storage
 mkdir -p /mnt/local-storage/'Home Videos'
 mkdir -p /mnt/local-storage/Movies
@@ -28,29 +26,27 @@ mkdir -p /mnt/storage
 mkdir -p /opt/var/couchpotatoserver
 mkdir -p /opt/var/sickrage
 
-# Get Amazon Cloud Drive authentication data from environment.
-echo "$ACD_OAUTH_DATA" > "$ACD_CLI_CACHE_PATH/oauth_data"
+# Get Google Cloud Platform credentials from environment.
+echo "$GOOGLE_APPLICATION_CREDENTIALS" > /opt/var/key.json
+export GOOGLE_APPLICATION_CREDENTIALS=/opt/var/key.json
 
-# Mount Amazon Cloud Drive.
-acd_cli sync
-if [[ -z "$(mount | grep /mnt/acd)" ]]; then
-	acd_cli mount /mnt/acd
-fi
+# Mount Google Cloud Storage bucket.
+gcsfuse "$GOOGLE_CLOUD_STORAGE_BUCKET" /mnt/gcp
 
 # Create storage directory to avoid interactive prompt.
-mkdir -p "/mnt/acd/$ACD_STORAGE_DIR"
+mkdir -p "/mnt/gcp/$PCE_STORAGE_DIR"
 
-if [[ ! -f "/mnt/acd/$ACD_STORAGE_DIR/.encfs6.xml" ]]; then
+if [[ ! -f "/mnt/gcp/$PCE_STORAGE_DIR/.encfs6.xml" ]]; then
 	# Create and mount EncFS filesystem, with pre-configured paranoia mode.
-	echo p | encfs --extpass=extpass.sh "/mnt/acd/$ACD_STORAGE_DIR" /mnt/acd-storage
-elif [[ -z "$(mount | grep /mnt/acd-storage)" ]]; then
+	echo p | encfs --extpass=extpass.sh "/mnt/gcp/$PCE_STORAGE_DIR" /mnt/gcp-storage
+elif [[ -z "$(mount | grep /mnt/gcp-storage)" ]]; then
 	# Mount EncFS filesystem.
-	encfs --extpass=extpass.sh "/mnt/acd/$ACD_STORAGE_DIR" /mnt/acd-storage
+	encfs --extpass=extpass.sh "/mnt/gcp/$PCE_STORAGE_DIR" /mnt/gcp-storage
 fi
 
 # Mount UnionFS filesystem.
 if [[ -z "$(mount | grep /mnt/storage)" ]]; then
-	unionfs-fuse -o cow /mnt/local-storage=RW:/mnt/acd-storage=RW /mnt/storage
+	unionfs-fuse -o cow /mnt/local-storage=RW:/mnt/gcp-storage=RW /mnt/storage
 fi
 
 # Generate CouchPotatoServer API key.

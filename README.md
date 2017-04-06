@@ -2,7 +2,7 @@
 
 # Plex Cloud EncFS
 
-Easily run your own version of Plex in the Cloud, on any infrastructure you choose, with your media library safely encrypted with EncFS on Amazon Cloud Drive.
+Easily run your own version of Plex in the Cloud, on any infrastructure you choose, with your media library safely encrypted with EncFS on Google Cloud Storage.
 
 The following additional apps are included (and already configured to work together) to automate downloads and manage your media library:
 
@@ -19,19 +19,9 @@ The following additional apps are included (and already configured to work toget
 
  3. Save and start the stack.
 
- 4. On first run, the `plex-cloud-encfs` container's entrypoint script will pause so you can run an interactive terminal to configure `acd-cli` and `encfs`:
+ 4. Navigate to the `Endpoints` section of the stack and take note of the address for the service endpoint. Something like: `plex-cloud-encfs.{stack-name}.{sha}.svc.dockerapp.io`
 
-     1. Navigate to the `plex-cloud-encfs` container and start a terminal.
-
-     2. Run the entrypoint script, which will detect the interactive terminal and prompt you for authorisation and configuration:
-
-            # entrypoint.sh
-
-    After `acd-cli` and `encfs` are configured, the `plex-cloud-encfs` container's entrypoint script will continue automatically, and you can close your interactive terminal.
-
- 5. Navigate to the `Endpoints` section of the stack and take note of the address for the service endpoint. Something like: `plex-cloud-encfs.{stack-name}.{sha}.svc.dockerapp.io`
-
- 6. Configure wildcard or individual subdomain CNAME records that point to the service endpoint noted above, for `couchpotato`, `nzbget`, `plex`, `sickrage`, and `transmission` on your domain.
+ 5. Configure wildcard or individual subdomain CNAME records that point to the service endpoint noted above, for `couchpotato`, `nzbget`, `plex`, `sickrage`, and `transmission` on your domain.
 
 Note that on Docker Cloud, persistent data (personal configuration, library data) is stored on the node. If services are redeployed to a different node, this data will be lost.
 
@@ -44,27 +34,21 @@ Note that on Docker Cloud, persistent data (personal configuration, library data
 
  2. Save `docker-compose.override.sample.yml` as `docker-compose.override.yml` and provide or update values for all the required environment variables.
 
- 3. On first run, `acd-cli` and `encfs` will both prompt you for authorisation and configuration, so run interactively:
-
-        $ docker-compose run --rm --service-ports plex-cloud-encfs
-
-    After `acd-cli` and `encfs` are configured, you can run as a background service:
-
-        $ docker-compose up -d
-
- 4. Configure wildcard or individual subdomain DNS records that point to your IP address, for `couchpotato`, `nzbget`, `plex`, `sickrage`, and `transmission` on your domain.
+ 3. Configure wildcard or individual subdomain DNS records that point to your IP address, for `couchpotato`, `nzbget`, `plex`, `sickrage`, and `transmission` on your domain.
 
 # Required environment variables
 
 The following environment variables *must* be provided:
 
-  * `ACD_OAUTH_DATA` -- Login with your Amazon credentials at https://tensile-runway-92512.appspot.com/ to download an `oauth_data` file for `acd-cli`. Add the contents of the file to your `docker-cloud.yml` or `docker-compose.yml` file.
-
   * `BASIC_AUTH_USERNAME` and `BASIC_AUTH_PASSWORD` -- All services except Plex Media Server (which implements its own authentication) will be protected by basic auth using these credentials.
 
   * `DOMAIN` and `EMAIL` -- The domain on which the individual app subdomains are configured, and an email address where certificate expiration notices should be sent.
 
-  * `ENCFS_PASSWORD` -- Your media library will be encrypted on Amazon Cloud Drive using this password. You will never need to type it interactively, so make it strong. For example, 50+ random characters including uppercase, lowercase, numbers and symbols.
+  * `ENCFS_PASSWORD` -- Your media library will be encrypted using this password. You will never need to type it interactively, so make it strong. For example, 50+ random characters including uppercase, lowercase, numbers and symbols.
+
+  * `GOOGLE_APPLICATION_CREDENTIALS` -- Follow the instructions at https://developers.google.com/identity/protocols/application-default-credentials to download a key file for Google Cloud Storage. Add the contents of the file to your `docker-cloud.yml` or `docker-compose.yml` file.
+
+  * `GOOGLE_CLOUD_STORAGE_BUCKET` -- The name of the Google Cloud Storage bucket where you want to store your media library.
 
   * `PLEX_USERNAME` and `PLEX_PASSWORD` -- These are used to obtain an authentication token (which you can provide as `PLEX_TOKEN` instead, if already known) which links this Plex Media Server to your Plex account.
 
@@ -72,7 +56,7 @@ The following environment variables *must* be provided:
 
 All services can only be accessed remotely over HTTPS. SSL certificates will be created and renewed automatically for app subdomains under the domain given in the `DOMAIN` environment variable.
 
-# EncFS storage on Amazon Cloud Drive
+# EncFS storage on Google Cloud Storage
 
 The "storage" directory is where Plex Media Server expects to find its media libraries:
 
@@ -82,17 +66,17 @@ The "storage" directory is where Plex Media Server expects to find its media lib
   * Photos
   * TV Shows
 
-Your Amazon Cloud Drive is mounted at `/mnt/acd`.
+Your Google Cloud Storage bucket is mounted at `/mnt/gcp`.
 
-The `ACD_STORAGE_DIR` environment variable configures where your encrypted (via EncFS) storage directory will be located on your Amazon Cloud Drive. The default is `PCE`.
+The `PCE_STORAGE_DIR` environment variable configures where your encrypted (via EncFS) storage directory will be located in your Google Cloud Storage bucket. The default is `PCE`.
 
-The unencrypted storage directory is mounted at `/mnt/acd-storage`.
+The unencrypted storage directory is mounted at `/mnt/gcp-storage`.
 
-Remote storage like Amazon Cloud Drive is good enough to store and stream media, but is not ideal for downloading and extracting files. For that, we have `/mnt/local-storage`.
+Remote storage like Google Cloud Storage is good enough to store and stream media, but is not ideal for downloading and extracting files. For that, we have `/mnt/local-storage`.
 
-A UnionFS volume is mounted at `/mnt/storage`, which provides seamless read/write access to `/mnt/local-storage` and `/mnt/acd-storage`. This makes newly downloaded files immediately available to Plex Media Server.
+A UnionFS volume is mounted at `/mnt/storage`, which provides seamless read/write access to `/mnt/local-storage` and `/mnt/gcp-storage`. This makes newly downloaded files immediately available to Plex Media Server.
 
-The `local-to-acd.py` script is executed on a schedule, and will move all media library files from `/mnt/local-storage` to `/mnt/acd-storage`.
+The `local-to-gcp.py` script is executed on a schedule, and will move all files from `/mnt/local-storage` to `/mnt/gcp-storage`.
 
 # Configuration
 
@@ -164,5 +148,4 @@ By default, movies will be removed after a seed ratio of 2.0 and TV shows will b
 
 # TODO
 
-  * [ ] Schedule `local-to-acd.py` execution.
-  * [ ] Simplify authorisation and configuration of `acd-cli` and `encfs` on first run.
+  * [ ] Schedule `local-to-gcp.py` execution.

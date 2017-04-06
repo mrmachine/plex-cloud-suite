@@ -2,8 +2,6 @@ version: "2"
 services:
   plex-cloud-encfs:
     environment:
-      ACD_OAUTH_DATA: | # Required - download from https://tensile-runway-92512.appspot.com/
-        # Download from: https://tensile-runway-92512.appspot.com/
       BASIC_AUTH_PASSWORD: # Required
       BASIC_AUTH_USERNAME: # Required
       BTN_API_KEY:
@@ -11,6 +9,9 @@ services:
       DOMAIN: # Required
       EMAIL: # Required
       ENCFS_PASSWORD: # Required
+      GOOGLE_APPLICATION_CREDENTIALS: | # Required
+        # See: https://developers.google.com/identity/protocols/application-default-credentials
+      GOOGLE_CLOUD_STORAGE_BUCKET: # Required
       NZBGEEK_API_KEY:
       NZBS_ORG_API_KEY:
       PASSTHEPOPCORN_PASSKEY:
