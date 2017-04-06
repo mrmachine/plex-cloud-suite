@@ -18,6 +18,7 @@ do
     PERCENT_DONE=$(transmission-remote --torrent $ID --info | sed -nr 's/.*Percent Done: ([0-9]+).*/\1/p')
     RATIO=$(transmission-remote --torrent $ID --info | sed -nr 's/.*Ratio: ([.0-9]+)/\1/p')
     SEEDING_TIME=$(transmission-remote --torrent $ID --info | sed -nr 's/.*Seeding Time:.*[(]([0-9]+).*/\1/p')
+    ERROR=$(transmission-remote --torrent $ID --info | sed -nr 's/.*Tracker gave an error: (.+)/\1/p')
 
     # Convert seconds to hours.
     SEEDING_TIME=$(echo "${SEEDING_TIME:-0} / 60 / 60" | bc)
@@ -29,7 +30,15 @@ Clean Torrent:
   PERCENT DONE: $PERCENT_DONE
   RATIO: $RATIO
   SEEDING TIME: $SEEDING_TIME
+  ERROR: $ERROR
 EOF
+
+    # Remove and delete if unregistered with tracker.
+    if [[ "$ERROR" = "Unregistered torrent" ]]; then
+        echo "  Unregistered. Remove and delete torrent: $NAME"
+        transmission-remote --torrent $ID --remove-and-delete
+        continue
+    fi
 
     # Skip if incomplete.
     if [[ "$PERCENT_DONE" != 100 ]]; then
