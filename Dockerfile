@@ -52,6 +52,7 @@ ENV TINI_VERSION=0.14.0
 RUN wget -nv -O /usr/local/bin/tini "https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini-static"
 RUN chmod +x /usr/local/bin/tini
 
+RUN pip install --no-cache-dir hardlink==0.2
 RUN pip3 install --no-cache-dir acdcli==0.3.2
 
 ENV PATH=/opt/bin:$PATH
