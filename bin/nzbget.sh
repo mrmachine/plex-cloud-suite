@@ -14,7 +14,7 @@ fi
 
 # Create required directories.
 mkdir -p /opt/var/couchpotatoserver
-mkdir -p /opt/var/nzbget/dst
+mkdir -p /opt/var/nzbget/completed
 mkdir -p /opt/var/nzbToMedia
 
 # Get nzbToMedia source code.
