@@ -1,5 +1,5 @@
 plex-cloud-encfs:
-  image: 'mrmachine/plex-cloud-encfs:latest'
+  image: 'mrmachine/plex-cloud-encfs:master'
   autoredeploy: true
   cap_add:
     - MKNOD
