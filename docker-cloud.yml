@@ -4,31 +4,31 @@ plex-cloud-encfs:
   cap_add:
     - MKNOD
   environment:
-    - BASIC_AUTH_PASSWORD= # Required
-    - BASIC_AUTH_USERNAME= # Required
-    - BTN_API_KEY=
-    - DOGNZB_API_KEY=
-    - DOMAIN= # Required
-    - EMAIL= # Required
-    - ENCFS_PASSWORD= # Required
-    - GOOGLE_APPLICATION_CREDENTIALS=| # Required
+    BASIC_AUTH_PASSWORD: # Required
+    BASIC_AUTH_USERNAME: # Required
+    BTN_API_KEY:
+    DOGNZB_API_KEY:
+    DOMAIN: # Required
+    EMAIL: # Required
+    ENCFS_PASSWORD: # Required
+    GOOGLE_APPLICATION_CREDENTIALS: | # Required
       # See: https://developers.google.com/identity/protocols/application-default-credentials
-    - GOOGLE_CLOUD_STORAGE_BUCKET= # Required
-    - NZBGEEK_API_KEY=
-    - NZBS_ORG_API_KEY=
-    - PASSTHEPOPCORN_PASSKEY=
-    - PASSTHEPOPCORN_PASSWORD=
-    - PLEX_PASSWORD= # Required
-    - PLEX_TOKEN=
-    - PLEX_USERNAME= # Required
-    - PUSHOVER_API_KEY=
-    - PUSHOVER_USER_KEY=
-    - REQUIREMENTS=Movies:2.0:;TV Shows::240 # Required - {category:ratio:hours};...
-    - SERVER1_HOST=
-    - SERVER1_NAME=
-    - SERVER1_PASSWORD=
-    - SERVER1_USERNAME=
-    - TZ=Australia/Sydney # Required
+    GOOGLE_CLOUD_STORAGE_BUCKET: # Required
+    NZBGEEK_API_KEY:
+    NZBS_ORG_API_KEY:
+    PASSTHEPOPCORN_PASSKEY:
+    PASSTHEPOPCORN_PASSWORD:
+    PLEX_PASSWORD: # Required
+    PLEX_TOKEN:
+    PLEX_USERNAME: # Required
+    PUSHOVER_API_KEY:
+    PUSHOVER_USER_KEY:
+    REQUIREMENTS: Movies:2.0:;TV Shows::240 # Required - {category:ratio:hours};...
+    SERVER1_HOST:
+    SERVER1_NAME:
+    SERVER1_PASSWORD:
+    SERVER1_USERNAME:
+    TZ: Australia/Sydney # Required
   ports:
     - '80:80'
     - '443:443'
