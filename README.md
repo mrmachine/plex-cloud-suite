@@ -23,7 +23,7 @@ The following additional apps are included (and already configured to work toget
 
  5. Configure wildcard or individual subdomain CNAME records that point to the service endpoint noted above, for `couchpotato`, `nzbget`, `plex`, `sickrage`, and `transmission` on your domain.
 
-Note that on Docker Cloud, persistent data (personal configuration, library data) is stored on the node. If services are redeployed to a different node, this data will be lost.
+Note that on Docker Cloud, persistent data (personal configuration, media library metadata) is stored on the node. If services are redeployed to a different node, this data will be lost.
 
 # Run with Docker Compose
 
@@ -58,7 +58,7 @@ All services can only be accessed remotely over HTTPS. SSL certificates will be 
 
 # EncFS storage on Google Cloud Storage
 
-The "storage" directory is where Plex Media Server expects to find its media libraries:
+The "storage" directory is where Plex Media Server expects to find your media library:
 
   * Home Videos
   * Movies
@@ -122,7 +122,7 @@ Check the `etc/*.tmpl.*` files to see exactly what has been changed from their o
 
 You will need to further configure them with your own personal preferences. For example:
 
-  * Media libraries
+  * Plex Media Server libraries
   * Torrent tracker credentials
   * Usenet indexer/provider credentials
   * Wanted movies and TV shows
