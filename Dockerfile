@@ -45,7 +45,7 @@ ENV PMS_VERSION=1.5.3.3580-4b377d295
 RUN URL="https://downloads.plex.tv/plex-media-server/${PMS_VERSION}/plexmediaserver_${PMS_VERSION}_amd64.deb"; FILE="$(mktemp)"; wget -nv -O "$FILE" "$URL" \
     && dpkg -i "$FILE"; rm "$FILE"
 
-ENV DOCKERIZE_VERSION=0.2.0
+ENV DOCKERIZE_VERSION=0.4.0
 RUN wget -nv -O - "https://github.com/jwilder/dockerize/releases/download/v${DOCKERIZE_VERSION}/dockerize-linux-amd64-v${DOCKERIZE_VERSION}.tar.gz" | tar -xz -C /usr/local/bin/ -f -
 
 ENV TINI_VERSION=0.9.0
