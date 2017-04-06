@@ -15,13 +15,7 @@ export PCE_STORAGE_DIR="${PCE_STORAGE_DIR:-PCE}"  # Relative to ACD root
 
 # Create required local directories.
 mkdir -p /mnt/gcp
-mkdir -p /mnt/gcp-storage
 mkdir -p /mnt/local-storage
-mkdir -p /mnt/local-storage/'Home Videos'
-mkdir -p /mnt/local-storage/Movies
-mkdir -p /mnt/local-storage/Music
-mkdir -p /mnt/local-storage/Photos
-mkdir -p /mnt/local-storage/'TV Shows'
 mkdir -p /mnt/storage
 mkdir -p /opt/var/couchpotatoserver
 mkdir -p /opt/var/sickrage
@@ -38,16 +32,18 @@ mkdir -p "/mnt/gcp/$PCE_STORAGE_DIR"
 
 if [[ ! -f "/mnt/gcp/$PCE_STORAGE_DIR/.encfs6.xml" ]]; then
 	# Create and mount EncFS filesystem, with pre-configured paranoia mode.
-	echo p | encfs --extpass=extpass.sh "/mnt/gcp/$PCE_STORAGE_DIR" /mnt/gcp-storage
-elif [[ -z "$(mount | grep /mnt/gcp-storage)" ]]; then
+	echo p | encfs --extpass=extpass.sh "/mnt/gcp/$PCE_STORAGE_DIR" /mnt/storage
+elif [[ -z "$(mount | grep /mnt/storage)" ]]; then
 	# Mount EncFS filesystem.
-	encfs --extpass=extpass.sh "/mnt/gcp/$PCE_STORAGE_DIR" /mnt/gcp-storage
+	encfs --extpass=extpass.sh "/mnt/gcp/$PCE_STORAGE_DIR" /mnt/storage
 fi
 
-# Mount UnionFS filesystem.
-if [[ -z "$(mount | grep /mnt/storage)" ]]; then
-	unionfs-fuse -o cow /mnt/local-storage=RW:/mnt/gcp-storage=RW /mnt/storage
-fi
+# Create media library directories.
+mkdir -p /mnt/storage/'Home Videos'
+mkdir -p /mnt/storage/Movies
+mkdir -p /mnt/storage/Music
+mkdir -p /mnt/storage/Photos
+mkdir -p /mnt/storage/'TV Shows'
 
 # Generate CouchPotatoServer API key.
 if [[ ! -f /opt/var/couchpotatoserver/api_key.txt ]]; then

@@ -70,13 +70,9 @@ Your Google Cloud Storage bucket is mounted at `/mnt/gcp`.
 
 The `PCE_STORAGE_DIR` environment variable configures where your encrypted (via EncFS) storage directory will be located in your Google Cloud Storage bucket. The default is `PCE`.
 
-The unencrypted storage directory is mounted at `/mnt/gcp-storage`.
+The unencrypted storage directory is mounted at `/mnt/storage`.
 
 Remote storage like Google Cloud Storage is good enough to store and stream media, but is not ideal for downloading and extracting files. For that, we have `/mnt/local-storage`.
-
-A UnionFS volume is mounted at `/mnt/storage`, which provides seamless read/write access to `/mnt/local-storage` and `/mnt/gcp-storage`. This makes newly downloaded files immediately available to Plex Media Server.
-
-The `local-to-gcp.py` script is executed on a schedule, and will move all files from `/mnt/local-storage` to `/mnt/gcp-storage`.
 
 # Configuration
 
@@ -145,7 +141,3 @@ Completed torrents and data will be removed from Transmission when ratio or seed
     REQUIREMENTS="Movies:2.0:;TV Shows::240"
 
 By default, movies will be removed after a seed ratio of 2.0 and TV shows will be removed after a seed time of 240 hours (10 days).
-
-# TODO
-
-  * [ ] Schedule `local-to-gcp.py` execution.

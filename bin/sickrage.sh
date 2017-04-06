@@ -3,7 +3,7 @@
 set -e
 
 # Create required directories.
-mkdir -p "/mnt/storage/Downloads/Process/TV Shows"
+mkdir -p "/mnt/local-storage/Downloads/Process/TV Shows"
 mkdir -p "/mnt/storage/TV Shows"
 mkdir -p /opt/var/sickrage/src
 
