@@ -99,6 +99,7 @@ All the apps are configured to work together, and some of their default settings
       * Disable authentication (rely on nginx basic authentication)
       * Enable loggable output
       * Server 1 config: 10 connections, encrypted, port 443
+      * Server 2 config: level 1, 10 connections, encrypted, port 443
   * Plex Media Server
       * Friendly name: `Plex Cloud EncFS`
   * Sick Rage
