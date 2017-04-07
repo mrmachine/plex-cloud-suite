@@ -11,9 +11,6 @@ plex-cloud-encfs:
     DOMAIN: # Required
     EMAIL: # Required
     ENCFS_PASSWORD: # Required
-    GOOGLE_APPLICATION_CREDENTIALS: | # Required
-      # See: https://developers.google.com/identity/protocols/application-default-credentials
-    GOOGLE_CLOUD_STORAGE_BUCKET: # Required
     NZBGEEK_API_KEY:
     NZBS_ORG_API_KEY:
     PASSTHEPOPCORN_PASSKEY:
@@ -24,6 +21,8 @@ plex-cloud-encfs:
     PLEX_USERNAME: # Required
     PUSHOVER_API_KEY:
     PUSHOVER_USER_KEY:
+    RCLONE_CONFIG: | # Required
+      # See: https://rclone.org/drive/
     REQUIREMENTS: Movies:2.0:;TV Shows::240 # Required - {category:ratio:hours};...
     SERVER1_HOST:
     SERVER1_NAME:
@@ -33,7 +32,6 @@ plex-cloud-encfs:
   ports:
     - '80:80'
     - '443:443'
-    - '32400:32400'
     - '51413:51413'
     - '51413:51413/udp'
   privileged: true
