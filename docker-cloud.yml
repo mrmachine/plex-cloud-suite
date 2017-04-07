@@ -21,7 +21,7 @@ plex-cloud-encfs:
     PLEX_USERNAME: # Required
     PUSHOVER_API_KEY:
     PUSHOVER_USER_KEY:
-    RCLONE_CONFIG: | # Required
+    RCLONE_CONF: | # Required
       # See: https://rclone.org/drive/
     REQUIREMENTS: Movies:2.0:;TV Shows::240 # Required - {category:ratio:hours};...
     SERVER1_HOST:
