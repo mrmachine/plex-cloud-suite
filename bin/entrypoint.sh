@@ -12,29 +12,8 @@ done
 
 # Create required local directories.
 mkdir -p /mnt/local-storage
-mkdir -p /mnt/storage
 mkdir -p /opt/var/couchpotatoserver
 mkdir -p /opt/var/sickrage
-mkdir -p /root/.config/rclone
-
-# Get Rclone config from environment.
-echo "$RCLONE_CONF" > /root/.config/rclone/rclone.conf
-
-# Mount Rclone remote.
-rclone mount \
-	--acd-templink-threshold 0 \
-	--allow-other \
-	--log-file="/opt/var/rclone.log" \
-	--stats 1s \
-	-v \
-	remote: /mnt/storage &
-
-# Create media library directories.
-mkdir -p /mnt/storage/'Home Videos'
-mkdir -p /mnt/storage/Movies
-mkdir -p /mnt/storage/Music
-mkdir -p /mnt/storage/Photos
-mkdir -p /mnt/storage/'TV Shows'
 
 # Generate CouchPotatoServer API key.
 if [[ ! -f /opt/var/couchpotatoserver/api_key.txt ]]; then

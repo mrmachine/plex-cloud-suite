@@ -2,6 +2,9 @@
 
 set -e
 
+# Wait until Rclone remote is mounted.
+wait-for-rclone.sh
+
 # Create required directories.
 mkdir -p /mnt/local-storage/Downloads/Process/Movies
 mkdir -p /mnt/storage/Movies
