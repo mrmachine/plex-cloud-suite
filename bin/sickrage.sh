@@ -6,8 +6,8 @@ set -e
 wait-for-rclone.sh
 
 # Create required directories.
-mkdir -p "/mnt/local-storage/Downloads/Process/TV Shows"
-mkdir -p "/mnt/storage/TV Shows"
+mkdir -p /mnt/local-storage/Downloads/Process/'TV Shows'
+mkdir -p /mnt/storage/'TV Shows'
 mkdir -p /opt/var/sickrage/src
 
 # Get source code.
