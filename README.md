@@ -34,7 +34,7 @@ Note that on Docker Cloud, persistent data (personal configuration, media librar
 
  3. Configure wildcard or individual subdomain DNS records that point to your IP address, for `couchpotato`, `nzbget`, `plex`, `sickrage`, and `transmission` on your domain.
 
-# Required environment variables
+# Required Environment Variables
 
 The following environment variables *must* be provided:
 
@@ -42,7 +42,7 @@ The following environment variables *must* be provided:
 
   * `DOMAIN` and `EMAIL` -- The domain on which the individual app subdomains are configured, and an email address where certificate expiration notices should be sent.
 
-# Secure access over HTTPS
+# Secure Access Over HTTPS
 
 All services can only be accessed remotely over HTTPS. SSL certificates will be created and renewed automatically for app subdomains under the domain given in the `DOMAIN` environment variable.
 
