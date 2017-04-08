@@ -1,10 +1,8 @@
-[![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/mrmachine/plex-cloud-encfs/)
+[![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/mrmachine/plex-cloud-suite/)
 
-# Plex Cloud EncFS
+# Plex Cloud Suite
 
-Easily run your own version of Plex in the Cloud, on any infrastructure you choose, with your media library safely encrypted with EncFS on Google Cloud Storage.
-
-The following additional apps are included (and already configured to work together) to automate downloads and manage your media library:
+Provides a suite of apps, already configured to work together, to automate downloads and manage your Plex Cloud media library:
 
   * Couch Potato
   * NZBGet
@@ -13,13 +11,13 @@ The following additional apps are included (and already configured to work toget
 
 # Run on Docker Cloud
 
- 1. Click the [Deploy to Docker Cloud](https://cloud.docker.com/stack/deploy/?repo=https://github.com/mrmachine/plex-cloud-encfs/) button above to create a new stack on Docker Cloud.
+ 1. Click the [Deploy to Docker Cloud](https://cloud.docker.com/stack/deploy/?repo=https://github.com/mrmachine/plex-cloud-suite/) button above to create a new stack on Docker Cloud.
 
  2. Provide or update values for all the required environment variables.
 
  3. Save and start the stack.
 
- 4. Navigate to the `Endpoints` section of the stack and take note of the address for the service endpoint. Something like: `plex-cloud-encfs.{stack-name}.{sha}.svc.dockerapp.io`
+ 4. Navigate to the `Endpoints` section of the stack and take note of the address for the service endpoint. Something like: `plex-cloud-suite.{stack-name}.{sha}.svc.dockerapp.io`
 
  5. Configure wildcard or individual subdomain CNAME records that point to the service endpoint noted above, for `couchpotato`, `nzbget`, `plex`, `sickrage`, and `transmission` on your domain.
 
@@ -29,8 +27,8 @@ Note that on Docker Cloud, persistent data (personal configuration, media librar
 
  1. Get the code and change directory:
 
-        $ git clone https://github.com/mrmachine/plex-cloud-encfs.git
-        $ cd plex-cloud-encfs
+        $ git clone https://github.com/mrmachine/plex-cloud-suite.git
+        $ cd plex-cloud-suite
 
  2. Save `docker-compose.override.sample.yml` as `docker-compose.override.yml` and provide or update values for all the required environment variables.
 
@@ -44,35 +42,17 @@ The following environment variables *must* be provided:
 
   * `DOMAIN` and `EMAIL` -- The domain on which the individual app subdomains are configured, and an email address where certificate expiration notices should be sent.
 
-  * `ENCFS_PASSWORD` -- Your media library will be encrypted using this password. You will never need to type it interactively, so make it strong. For example, 50+ random characters including uppercase, lowercase, numbers and symbols.
-
-  * `GOOGLE_APPLICATION_CREDENTIALS` -- Follow the instructions at https://developers.google.com/identity/protocols/application-default-credentials to download a key file for Google Cloud Storage. Add the contents of the file to your `docker-cloud.yml` or `docker-compose.yml` file.
-
-  * `GOOGLE_CLOUD_STORAGE_BUCKET` -- The name of the Google Cloud Storage bucket where you want to store your media library.
-
-  * `PLEX_USERNAME` and `PLEX_PASSWORD` -- These are used to obtain an authentication token (which you can provide as `PLEX_TOKEN` instead, if already known) which links this Plex Media Server to your Plex account.
-
 # Secure access over HTTPS
 
 All services can only be accessed remotely over HTTPS. SSL certificates will be created and renewed automatically for app subdomains under the domain given in the `DOMAIN` environment variable.
 
-# EncFS storage on Google Cloud Storage
+# Cloud Storage via Rclone
 
-The "storage" directory is where Plex Media Server expects to find your media library:
+The `/mnt/storage` directory is where your Dropbox, Google Drive or OneDrive cloud storage will be mounted via Rclone. Couch Potato and Sick Rage will move downloaded files to the `Movies` and `TV Shows` sub-directories during post processing.
 
-  * Home Videos
-  * Movies
-  * Music
-  * Photos
-  * TV Shows
+# Local Storage
 
-Your Google Cloud Storage bucket is mounted at `/mnt/gcp`.
-
-The `PCE_STORAGE_DIR` environment variable configures where your encrypted (via EncFS) storage directory will be located in your Google Cloud Storage bucket. The default is `PCE`.
-
-The unencrypted storage directory is mounted at `/mnt/storage`.
-
-Remote storage like Google Cloud Storage is good enough to store and stream media, but is not ideal for downloading and extracting files. For that, we have `/mnt/local-storage`.
+Cloud storage mounted via Rclone is not suitable for processing (downloading and extracting). For that, we have `/mnt/local-storage`, which is a persistent volume on the Docker host.
 
 # Configuration
 
@@ -100,8 +80,6 @@ All the apps are configured to work together, and some of their default settings
       * Enable loggable output
       * Server 1 config: 10 connections, encrypted, port 443
       * Server 2 config: level 1, 10 connections, encrypted, port 443
-  * Plex Media Server
-      * Friendly name: `Plex Cloud EncFS`
   * Sick Rage
       * Enable BTN, DogNZB, GeekNZB, and NZBs.org providers
       * Enable failed download handling (via `nzbToMedia`)
@@ -119,20 +97,9 @@ Check the `etc/*.tmpl.*` files to see exactly what has been changed from their o
 
 You will need to further configure them with your own personal preferences. For example:
 
-  * Plex Media Server libraries
   * Torrent tracker credentials
   * Usenet indexer/provider credentials
   * Wanted movies and TV shows
-
-## Plex Media Server
-
-On first run, there are no automatically configured media libraries. When you add a library, be sure to choose from the existing library directories:
-
-  * `/mnt/storage/Home Videos`
-  * `/mnt/storage/Movies`
-  * `/mnt/storage/Music`
-  * `/mnt/storage/Photos`
-  * `/mnt/storage/TV Shows`
 
 ## Transmission
 

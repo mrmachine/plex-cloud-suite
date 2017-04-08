@@ -13,9 +13,6 @@ services:
       PASSTHEPOPCORN_PASSKEY:
       PASSTHEPOPCORN_PASSWORD:
       PASSTHEPOPCORN_USERNAME:
-      PLEX_PASSWORD: # Required
-      PLEX_TOKEN:
-      PLEX_USERNAME: # Required
       PUSHOVER_API_KEY:
       PUSHOVER_USER_KEY:
       RCLONE_CONF: | # Required
