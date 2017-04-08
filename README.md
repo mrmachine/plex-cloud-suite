@@ -42,6 +42,8 @@ The following environment variables *must* be provided:
 
   * `DOMAIN` and `EMAIL` -- The domain on which the individual app subdomains are configured, and an email address where certificate expiration notices should be sent.
 
+  * `RCLONE_CONF` -- Run `rclone config` to generate an `rclone.conf` file for your preferred cloud storage provider. Add the contents of the file to your `docker-cloud.yml` or `docker-compose.yml` file.
+
 # Secure Access Over HTTPS
 
 All services can only be accessed remotely over HTTPS. SSL certificates will be created and renewed automatically for app subdomains under the domain given in the `DOMAIN` environment variable.
