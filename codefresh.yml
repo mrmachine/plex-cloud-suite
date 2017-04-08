@@ -3,7 +3,7 @@ steps:
   build_image:
     type: build
     title: Building Docker Image
-    image_name: mrmachine/plex-cloud-encfs
+    image_name: mrmachine/plex-cloud-suite
   push_image:
     type: push
     title: Pushing Docker Image to Registry

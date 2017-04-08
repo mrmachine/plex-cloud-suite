@@ -1,6 +1,6 @@
 version: "2"
 services:
-  plex-cloud-encfs:
+  plex-cloud-suite:
     environment:
       BASIC_AUTH_PASSWORD: # Required
       BASIC_AUTH_USERNAME: # Required

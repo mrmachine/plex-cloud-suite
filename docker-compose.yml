@@ -1,11 +1,11 @@
 version: "2"
 services:
-  plex-cloud-encfs:
+  plex-cloud-suite:
     build: .
     cap_add:
       - MKNOD
     command: supervisor.sh
-    image: 'mrmachine/plex-cloud-encfs:local'
+    image: 'mrmachine/plex-cloud-suite:local'
     ports:
       - '80:80'
       - '443:443'
