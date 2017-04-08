@@ -3,7 +3,7 @@
 set -e
 
 # Fail loudly when required environment variables are missing.
-for var in BASIC_AUTH_PASSWORD BASIC_AUTH_USERNAME DOMAIN EMAIL PLEX_PASSWORD PLEX_USERNAME RCLONE_CONF; do
+for var in BASIC_AUTH_PASSWORD BASIC_AUTH_USERNAME DOMAIN EMAIL RCLONE_CONF; do
 	eval [[ -z \${$var+1} ]] && {
 		>&2 echo "ERROR: Required environment variable is missing: $var"
 		exit 1
