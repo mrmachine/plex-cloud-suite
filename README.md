@@ -71,9 +71,7 @@ All the apps are configured to work together, and some of their default settings
       * Enable Pushover notifications
       * Prefer NZBs over torrents
       * Require 1080P or DVD-Rip quality
-      * Enable automation
-          * Download all Action, Drama, Horror, or Sci-Fi rated over 8.0 since 1979
-          * Ignore Comedy, Romance
+      * Automation requirements: Sci-Fi, rated over 8.0, released after 1979
   * NZBGet
       * Enable `nzbToMedia` integration
       * Disable authentication (rely on nginx basic authentication)
