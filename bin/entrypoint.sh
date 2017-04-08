@@ -11,7 +11,6 @@ for var in BASIC_AUTH_PASSWORD BASIC_AUTH_USERNAME DOMAIN EMAIL PLEX_PASSWORD PL
 done
 
 # Create required local directories.
-mkdir -p /mnt/local-storage
 mkdir -p /opt/var/couchpotatoserver
 mkdir -p /opt/var/sickrage
 
