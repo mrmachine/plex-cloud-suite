@@ -70,7 +70,7 @@ All the apps are configured to work together, and some of their default settings
       * Enable library management
       * Enable Pushover notifications
       * Prefer NZBs over torrents
-      * Require 1080P WEB-DL, DVDrip, or SDTV quality
+      * Require 1080P or DVD-Rip quality
       * Enable automation
           * Download all Action, Drama, Horror, or Sci-Fi rated over 8.0 since 1979
           * Ignore Comedy, Romance
@@ -88,7 +88,7 @@ All the apps are configured to work together, and some of their default settings
       * Flatten folders by default
       * Rename and move downloaded files to `/mnt/storage/TV Shows`
       	  * File naming pattern: `%Sx%0E %EN %QN`
-      * Require 720P or DVD-Rip quality
+      * Require 1080P WEB-DL, DVDrip, or SDTV quality
   * Transmission
       * Remove movie torrents and data after a seed ratio of 2.0
       * Remove TV show torrents and data after 240 hours (10 days) seed time
