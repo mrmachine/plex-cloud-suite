@@ -10,6 +10,7 @@ RUN apt-get update \
         apache2-utils \
         bc \
         ffmpeg \
+        fuse \
         jq \
         less \
         nano \
