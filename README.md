@@ -72,7 +72,7 @@ All the apps are configured to work together, and some of their default settings
       * Enable library management
       * Enable Pushover notifications
       * Prefer NZBs over torrents
-      * Require 1080P or DVD-Rip quality
+      * Require 2160P, 1080P, or DVD-Rip quality
       * Automation requirements: Sci-Fi, rated over 8.0, released after 1979
   * NZBGet
       * Enable `nzbToMedia` integration
