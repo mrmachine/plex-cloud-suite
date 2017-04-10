@@ -10,7 +10,7 @@ echo "$RCLONE_CONF" > /root/.config/rclone/rclone.conf
 mkdir -p /mnt/storage
 
 # Unmount before re-mounting.
-if ! (mount | grep -q fuse.rclone); then
+if mount | grep -q fuse.rclone; then
 	fusermount -uz /mnt/storage
 fi
 
