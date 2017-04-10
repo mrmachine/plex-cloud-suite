@@ -9,7 +9,12 @@ echo "$RCLONE_CONF" > /root/.config/rclone/rclone.conf
 # Create mount point.
 mkdir -p /mnt/storage
 
-# Mount Rclone remote.
+# Unmount before re-mounting.
+if ! (mount | grep -q fuse.rclone); then
+	fusermount -uz /mnt/storage
+fi
+
+# Mount.
 rclone mount \
 	--stats 1s \
 	-v \
