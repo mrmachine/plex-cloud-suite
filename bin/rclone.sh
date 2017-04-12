@@ -17,11 +17,7 @@ while true; do
 		mkdir -p /mnt/remote/storage
 
 		# Mount.
-		rclone mount \
-			--stats 5s \
-			--verbose \
-			remote: \
-			/mnt/remote/storage &
+		rclone mount --verbose remote: /mnt/remote/storage &
 	fi
 
 	# Mount UnionFS storage.
@@ -42,6 +38,7 @@ while true; do
 		--exclude=.unionfs/** \
 		--min-age=1m \
 		--no-traverse \
+		--stats 5s \
 		--verbose \
 		/mnt/local/storage/ \
 		remote:
