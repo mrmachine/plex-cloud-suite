@@ -33,7 +33,7 @@ while true; do
 		# Mount.
 		unionfs-fuse \
 			-o cow \
-			/mnt/local/storage=RW:/mnt/remote/storage=RW \
+			/mnt/local/storage=RW:/mnt/remote/storage=RO \
 			/mnt/storage
 	fi
 
