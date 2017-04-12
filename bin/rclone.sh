@@ -47,7 +47,7 @@ while true; do
 		remote:
 
 	# Clean up empty directories left by Rclone move.
-	find /mnt/local/storage/ -type d -empty -delete
+	find /mnt/local/storage/ -mindepth 1 -type d -empty -delete
 
 	# Wait at least 1 minute between iterations.
 	sleep 60
