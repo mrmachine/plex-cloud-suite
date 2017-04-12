@@ -18,7 +18,6 @@ while true; do
 
 		# Mount.
 		rclone mount \
-			--read-only \
 			--stats 5s \
 			--verbose \
 			remote: \
