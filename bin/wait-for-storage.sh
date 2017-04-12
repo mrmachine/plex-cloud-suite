@@ -7,7 +7,7 @@ while ! (mount | grep -q fuse.rclone); do
 	sleep 1
 done
 
-while ! (mount | grep -q fuse.unionfs); do
+while ! (mount | grep -q fuse.unionfs-fuse); do
 	echo 'UnionFS storage not mounted. Sleeping for 1 second.'
 	sleep 1
 done

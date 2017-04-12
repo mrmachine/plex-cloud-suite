@@ -26,7 +26,7 @@ while true; do
 	fi
 
 	# Mount UnionFS storage.
-	if ! (mount | grep -q fuse.unionfs); then
+	if ! (mount | grep -q fuse.unionfs-fuse); then
 		# Create mount points.
 		mkdir -p /mnt/local/storage
 		mkdir -p /mnt/storage
