@@ -26,6 +26,7 @@ RUN apt-get update \
         supervisor \
         transmission-cli \
         transmission-daemon \
+        unionfs-fuse \
         unrar \
         unzip \
         vim-tiny \
@@ -60,7 +61,7 @@ EXPOSE 443
 EXPOSE 51413 51413/udp
 
 VOLUME /etc/letsencrypt
-VOLUME /mnt/local-storage
+VOLUME /mnt/local
 VOLUME /opt/var
 
 ENTRYPOINT ["tini", "--", "entrypoint.sh"]

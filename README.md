@@ -48,13 +48,15 @@ The following environment variables *must* be provided:
 
 All services can only be accessed remotely over HTTPS. SSL certificates will be created and renewed automatically for app subdomains under the domain given in the `DOMAIN` environment variable.
 
-# Cloud Storage via Rclone
+# Cloud Storage via Rclone and UnionFS
 
-The `/mnt/storage` directory is where your Dropbox, Google Drive or OneDrive cloud storage will be mounted via Rclone. Couch Potato and Sick Rage will move downloaded files to the `Movies` and `TV Shows` sub-directories during post processing.
+The `/mnt/remote/storage` directory is where your Dropbox, Google Drive or OneDrive cloud storage will be mounted via Rclone.
 
-# Local Storage
+The `/mnt/storage` directory is a UnionFS mount spanning `/mnt/local/storage` and `/mnt/remote/storage`.
 
-Cloud storage mounted via Rclone is not suitable for processing (downloading and extracting). For that, we have `/mnt/local-storage`, which is a persistent volume on the Docker host.
+Couch Potato and Sick Rage will move downloaded files to the `Movies` and `TV Shows` directories in local storage, via the UnionFS mount, during post processing.
+
+An `rclone move` command runs in a loop, moving files older than 1 minute from local to remote storage.
 
 # Configuration
 

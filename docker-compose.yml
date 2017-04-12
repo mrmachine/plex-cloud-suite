@@ -16,5 +16,5 @@ services:
     volumes:
       - ./bin:/opt/bin
       - ./etc:/opt/etc
-      - ./local-storage:/mnt/local-storage
+      - ./local:/mnt/local
       - ./var:/opt/var

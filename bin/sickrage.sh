@@ -2,12 +2,12 @@
 
 set -e
 
-# Wait until Rclone remote is mounted.
-wait-for-rclone.sh
+# Wait until Rclone and UnionFS storage are mounted.
+wait-for-storage.sh
 
 # Create required directories.
-mkdir -p /mnt/local-storage/Downloads/Process/'TV Shows'
-mkdir -p /mnt/storage/'TV Shows'
+mkdir -p /mnt/local/process/'TV Shows'
+mkdir -p /mnt/remote/storage/'TV Shows'
 mkdir -p /opt/var/sickrage/src
 
 # Get source code.

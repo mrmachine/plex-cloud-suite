@@ -2,12 +2,12 @@
 
 set -e
 
-# Wait until Rclone remote is mounted.
-wait-for-rclone.sh
+# Wait until Rclone and UnionFS storage are mounted.
+wait-for-storage.sh
 
 # Create required directories.
-mkdir -p /mnt/local-storage/Downloads/Process/Movies
-mkdir -p /mnt/storage/Movies
+mkdir -p /mnt/local/process/Movies
+mkdir -p /mnt/remote/storage/Movies
 mkdir -p /opt/var/couchpotatoserver/src
 
 # Get source code.

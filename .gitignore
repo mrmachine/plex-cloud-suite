@@ -3,5 +3,5 @@
 /docker-cloud.*.yml
 /docker-compose.override.yml
 /etc/letsencrypt/
-/local-storage/
+/local/
 /var/
