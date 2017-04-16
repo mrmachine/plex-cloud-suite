@@ -9,9 +9,11 @@ while true; do
 
 	# Mount Rclone storage.
 	if ! (mount | grep -q fuse.rclone); then
-		# Get config from environment.
-		mkdir -p /root/.config/rclone
-		echo "$RCLONE_CONF" > /root/.config/rclone/rclone.conf
+		if [[ ! -f /root/.config/rclone/rclone.conf ]]; then
+			# Get config from environment.
+			mkdir -p /root/.config/rclone
+			echo "$RCLONE_CONF" > /root/.config/rclone/rclone.conf
+		fi
 
 		# Create mount point.
 		mkdir -p /mnt/remote/storage
