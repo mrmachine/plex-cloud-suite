@@ -37,7 +37,7 @@ while true; do
 
 	# Move local storage to remote.
 	rclone move \
-		--exclude=.unionfs/** \
+		--exclude=.unionfs-fuse/** \
 		--min-age=1m \
 		--no-traverse \
 		--stats 5s \
