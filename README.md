@@ -82,6 +82,7 @@ All the apps are configured to work together, and some of their default settings
       * Enable loggable output
       * Server 1 config: 10 connections, encrypted, port 443
       * Server 2 config: level 1, 10 connections, encrypted, port 443
+      * Pause download queue on par check, unpack and script execution.
   * Sick Rage
       * Enable BTN, DogNZB, GeekNZB, and NZBs.org providers
       * Enable failed download handling (via `nzbToMedia`)
