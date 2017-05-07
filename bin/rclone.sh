@@ -35,6 +35,9 @@ while true; do
 			/mnt/storage
 	fi
 
+	# Fix files with a future mtime.
+	find . -newermt "1 min"  -exec touch {} +
+
 	# Move local storage to remote.
 	rclone move \
 		--exclude=.unionfs-fuse/** \
