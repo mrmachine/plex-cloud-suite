@@ -12,6 +12,7 @@ done
 
 # Create required local directories.
 mkdir -p /opt/var/couchpotatoserver
+mkdir -p /opt/var/log
 mkdir -p /opt/var/sickrage
 
 # Generate CouchPotatoServer API key.
