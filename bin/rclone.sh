@@ -36,7 +36,7 @@ while true; do
 	fi
 
 	# Fix files with a future mtime.
-	find . -newermt "1 min"  -exec touch {} +
+	find /mnt/local/storage/ -newermt "1 min"  -exec touch {} +
 
 	# Move local storage to remote.
 	rclone move \
