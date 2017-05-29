@@ -39,10 +39,10 @@ RUN cd /usr/local/bin \
     && ln -s /root/.local/share/letsencrypt/bin/certbot /usr/local/bin/certbot \
     && rm -rf /var/lib/apt/lists/*
 
-ENV DOCKERIZE_VERSION=0.4.0
+ENV DOCKERIZE_VERSION="0.4.0"
 RUN wget -nv -O - "https://github.com/jwilder/dockerize/releases/download/v${DOCKERIZE_VERSION}/dockerize-linux-amd64-v${DOCKERIZE_VERSION}.tar.gz" | tar -xz -C /usr/local/bin/ -f -
 
-ENV LOGENTRIES_VERSION=1.4.41
+ENV LOGENTRIES_VERSION="1.4.41"
 RUN echo 'deb http://rep.logentries.com/ xenial main' > /etc/apt/sources.list.d/logentries.list
 RUN apt-get update \
     && apt-get install -y --allow-unauthenticated --no-install-recommends \
@@ -55,7 +55,7 @@ RUN wget -nv "https://downloads.rclone.org/rclone-${RCLONE_VERSION}-linux-amd64.
     && rm "rclone-${RCLONE_VERSION}-linux-amd64.zip"
 ENV PATH="/opt/rclone:$PATH"
 
-ENV TINI_VERSION=0.14.0
+ENV TINI_VERSION="0.14.0"
 RUN wget -nv -O /usr/local/bin/tini "https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini-static"
 RUN chmod +x /usr/local/bin/tini
 
