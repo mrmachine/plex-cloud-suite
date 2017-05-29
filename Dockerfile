@@ -42,6 +42,13 @@ RUN cd /usr/local/bin \
 ENV DOCKERIZE_VERSION=0.4.0
 RUN wget -nv -O - "https://github.com/jwilder/dockerize/releases/download/v${DOCKERIZE_VERSION}/dockerize-linux-amd64-v${DOCKERIZE_VERSION}.tar.gz" | tar -xz -C /usr/local/bin/ -f -
 
+ENV LOGENTRIES_VERSION=1.4.41
+RUN echo 'deb http://rep.logentries.com/ xenial main' > /etc/apt/sources.list.d/logentries.list
+RUN apt-get update \
+    && apt-get install -y --allow-unauthenticated --no-install-recommends \
+        logentries="${LOGENTRIES_VERSION}" \
+    && rm -rf /var/lib/apt/lists/*
+
 ENV RCLONE_VERSION="v1.36"
 RUN wget -nv "https://downloads.rclone.org/rclone-${RCLONE_VERSION}-linux-amd64.zip" \
     && unzip -j -d /usr/local/bin "rclone-${RCLONE_VERSION}-linux-amd64.zip" */rclone \
