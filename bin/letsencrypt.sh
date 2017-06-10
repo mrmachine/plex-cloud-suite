@@ -3,7 +3,7 @@
 set -e
 
 # Environment.
-export LIVE_CERT_FOLDER="/etc/letsencrypt/live/plex.$DOMAIN"
+export LIVE_CERT_FOLDER="/etc/letsencrypt/live/$DOMAIN"
 
 # Create required directories.
 mkdir -p /opt/var/ssl
@@ -12,7 +12,7 @@ mkdir -p /opt/www
 # Create or renew certificate.
 if certbot certonly \
 		--agree-tos \
-		--domains "plex.$DOMAIN,couchpotato.$DOMAIN,nzbget.$DOMAIN,sickrage.$DOMAIN,transmission.$DOMAIN" \
+		--domains "$DOMAIN,couchpotato.$DOMAIN,nzbget.$DOMAIN,plex.$DOMAIN,sickrage.$DOMAIN,transmission.$DOMAIN" \
 		--email "$EMAIL" \
 		--expand \
 		--noninteractive \
