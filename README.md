@@ -102,7 +102,7 @@ All the apps are configured to work together, and some of their default settings
       * Enable debug logging
       * Flatten folders by default
       * Rename and move downloaded files to `/mnt/storage/TV Shows`
-      	  * File naming pattern: `%Sx%0E %EN %QN`
+          * File naming pattern: `%Sx%0E %EN %QN`
       * Require 1080P WEB-DL, DVDrip, or SDTV quality
   * Transmission
       * Remove movie torrents and data after a seed ratio of 2.0
