@@ -1,5 +1,10 @@
 version: "2"
 services:
+  logentries:
+    command: -t # Log token
+  logspout:
+    environment:
+      SYSLOG_STRUCTURED_DATA: # Log token
   plex-cloud-suite:
     environment:
       BASIC_AUTH_PASSWORD: # Required
@@ -8,6 +13,7 @@ services:
       DOGNZB_API_KEY:
       DOMAIN: # Required
       EMAIL: # Required
+      LOGENTRIES_ACCOUNT_KEY:
       NZBGEEK_API_KEY:
       NZBS_ORG_API_KEY:
       PASSTHEPOPCORN_PASSKEY:

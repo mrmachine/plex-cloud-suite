@@ -1,3 +1,21 @@
+logentries:
+  command: -t # Log token
+  deployment_strategy: every_node
+  image: logentries/docker-logentries:0.2.1
+  tags:
+    - plex-cloud-suite
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+logspout:
+  command: syslog+tcp://data.logentries.com:10000
+  deployment_strategy: every_node
+  environment:
+    - SYSLOG_STRUCTURED_DATA= # Log token
+  image: gliderlabs/logspout:v3.2.2
+  tags:
+    - plex-cloud-suite
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
 plex-cloud-suite:
   image: 'mrmachine/plex-cloud-suite:master'
   autoredeploy: true
@@ -10,6 +28,7 @@ plex-cloud-suite:
     DOGNZB_API_KEY:
     DOMAIN: # Required
     EMAIL: # Required
+    LOGENTRIES_ACCOUNT_KEY:
     NZBGEEK_API_KEY:
     NZBS_ORG_API_KEY:
     PASSTHEPOPCORN_PASSKEY:

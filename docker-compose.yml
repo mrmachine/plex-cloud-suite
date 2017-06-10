@@ -1,5 +1,14 @@
 version: "2"
 services:
+  logentries:
+    image: logentries/docker-logentries:0.2.1
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  logspout:
+    command: syslog+tcp://data.logentries.com:10000
+    image: gliderlabs/logspout:v3.2.2
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
   plex-cloud-suite:
     build: .
     cap_add:

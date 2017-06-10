@@ -44,6 +44,18 @@ The following environment variables *must* be provided:
 
   * `RCLONE_CONF` -- Run `rclone config` to generate an `rclone.conf` file for your preferred cloud storage provider. Add the contents of the file to your `docker-cloud.yml` or `docker-compose.yml` file.
 
+# LogEntries Integration
+
+  * Create a free account at https://logentries.com.
+
+  * Create two manual TCP (token) logs (named `docker-logentries` and `docker-logspout`) in a log set named `plex-cloud-suite`.
+
+  * Add the `docker-logentries` token to the `command` for the `logentries` service.
+
+  * Add the `docker-logspout` token to the `SYSLOG_STRUCTURED_DATA` environment variable for the `logspout` service.
+
+  * Add your account key to the `LOGENTRIES_ACCOUNT_KEY` environment variable for the `plex-cloud-suite` service.
+
 # Secure Access Over HTTPS
 
 All services can only be accessed remotely over HTTPS. SSL certificates will be created and renewed automatically for app subdomains under the domain given in the `DOMAIN` environment variable.
